@@ -1,0 +1,83 @@
+<!-- /templates/blog.liquid -->
+{% paginate blog.articles by 5 %}
+
+<div class="grid">
+
+  <div class="grid__item large--five-sixths push--large--one-twelfth">
+
+    <header class="section-header text-center">
+      <h2>{{ blog.title }}</h2>
+      {% if page_description %}
+        <h1>{{ page_description }}</h1>
+      {% endif %}
+{% comment %}      <hr class="hr--small">{% endcomment %}
+      {% if current_tags %}
+        {{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
+      {% endif %}
+    </header>
+
+    <div class="grid">
+
+      {% for article in blog.articles %}
+
+        {% assign article_content = article.excerpt_or_content %}
+        {% assign featured_image_src = '' %}
+
+        {% if article.image %}
+          {% assign featured_image_src = article | img_url: '1024x1024' %}
+        {% elsif article_content contains '<img' %}
+          {% assign featured_image_src = article_content | split: 'src="' %}
+          {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
+        {% endif %}
+
+        <article class="grid__item article text-center medium-up--one-half">
+
+          <div class="grid">
+
+            {% unless featured_image_src == blank %}
+              <div class="grid__item">
+                <a class="article__featured-image" href="{{ article.url }}">
+                  {{ featured_image_src | img_tag: article.title }}
+                </a>
+              </div>
+            {% endunless %}
+
+    {% comment %}        <div class="grid__item large--two-tenths push--large--one-tenth">
+              <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" class="date">{{ article.published_at | date: format: 'month_day_year' }}</time>
+              <hr class="hr--small hr--left small--hide">
+            </div>{% endcomment %}
+            <div class="grid__item article__content large--two-thirds push--large--one-sixth three-quarters push--one-eighth">
+              <h1 class="article__title"><a href="{{ article.url }}">{{ article.title }}</a></h1>
+              <div class="rte rte--indented-images">
+                {{ article.excerpt_or_content }}
+              </div>
+
+    {% comment %}          <p>
+                <a href="{{ article.url }}" class="text-link">{{ 'blogs.article.read_more' | t }} <span class="icon icon-arrow-right" aria-hidden="true"></span></a>
+              </p>{% endcomment %}
+
+    {% comment %}          {% if article.tags.size > 0 %}
+                <ul class="tags tags--article inline-list">
+                  {% include 'tags-article' %}
+                </ul>
+              {% endif %}{% endcomment %}
+            </div>
+
+          </div>
+
+        </article>
+
+  {% comment %}      {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
+  {% endcomment %}
+      {% endfor %}
+
+    </div>
+
+    {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+    {% endif %}
+
+  </div>
+</div>
+
+{% endpaginate %}

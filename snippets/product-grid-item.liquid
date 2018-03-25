@@ -1,0 +1,100 @@
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'large--one-third medium--one-half' %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+<div class="grid__item grid-product {{ grid_item_width }}{% if sold_out %} is-sold-out{% endif %}">
+  <div class="grid-product__wrapper">
+    <div class="grid-product__image-wrapper">
+      <a class="grid-product__image-link" href="{{ product.url | within: collection }}">
+        {% if product.type == "Event" %}
+          {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+          {% for image in product.images %}
+            {% unless image contains featured_image %}
+              <img src="{{ image.src | img_url: '800x800' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image_event">
+              {% break %}
+            {% endunless %}
+          {% endfor %}
+        {% else %}
+          <img src="{{ product | img_url: '800x800' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image">
+        {% endif %}
+      </a>
+    </div>
+
+    <a href="{{ product.url | within: collection }}" class="grid-product__meta">
+      <div class="product-grid-left{% if product.metafields.c_f.productHiddenMsg or product.type == 'Event' %} product-grid-hover{% endif %}">
+          <div class="product-grid-details">
+            <div class="grid-product__title">{{ product.title }}</div>
+            <div class="grid-product__price-wrap">
+
+              <span class="grid-product__price">
+
+                {% if product.price_varies %}
+                  {% if product.available == false %}
+                    <span class="grid-product__original-price">{{ product.price_min | money_without_trailing_zeros }}</span>               <span class="icon-fallback-text">
+                      <span class="icon icon-plus grid-product__price-min" aria-hidden="true"></span>
+                      <span class="fallback-text">+</span>
+                    </span> <span class="grid-product__sold-out">Sold Out</span>
+                  {% else %}
+                    {{ product.price_min | money_without_trailing_zeros }}
+                    <span class="icon-fallback-text">
+                      <span class="icon icon-plus grid-product__price-min" aria-hidden="true"></span>
+                      <span class="fallback-text">+</span>
+                    </span>
+                  {% endif %}
+                {% elsif on_sale %}
+                  <span class="grid-product__original-price">{{ product.compare_at_price | money_without_trailing_zeros }}</span> <span class="grid-product__on-sale">{{ product.price | money_without_trailing_zeros }}</span>
+                {% elsif product.available == false %}
+                  <span class="grid-product__original-price">{{ product.price | money_without_trailing_zeros }}</span> <span class="grid-product__sold-out">Sold Out</span>
+                {% else %}
+                  <span class="price">{{ product.price | money_without_trailing_zeros }}</span>
+                {% endif %}
+
+              </span>
+
+            </div>
+
+            {% if section.settings.product_vendor_enable %}
+              <p class="grid-product__vendor">{{ product.vendor }}</p>
+            {% endif %}
+          </div>
+          {% if product.type == 'Event' %}
+            <div class="product-grid-seats{% unless product.available %} hide{% endunless %}">
+              <span class="grid-product__quantity">
+                {% for variant in product.variants %}
+                  {% if forloop.first == true %}
+                    {% if variant.inventory_management == "shopify" and variant.inventory_policy != "continue" %}
+                      {{ variant.inventory_quantity }} seats left!
+                    {% else %}
+                      Grab your spot!
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </span>
+            </div>
+          {% else %}
+            {% if product.metafields.c_f.productHiddenMsg %}
+              <div class="product-grid-msg">
+                <div class="grid-product__msg">{{ product.metafields.c_f.productHiddenMsg }}</div>
+              </div>
+            {% endif %}
+          {% endif %}
+      </div>
+      {% if product.metafields.c_f.productDate %}
+        <div class="product-grid-right">
+          <div class="grid-product__date">{{ product.metafields.c_f.productDate }}</div>
+        </div>
+      {% endif %}
+
+    </a>
+  </div>
+</div>

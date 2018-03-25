@@ -1,0 +1,33 @@
+<div class="blog-main">
+{% paginate blog.articles by settings.blog_pagination_limit %}
+    
+    {% for article in blog.articles %}
+
+        {% include 'blog-post' %}
+        
+    {% endfor %}
+    
+    {% include 'pagination' %}
+    
+{% endpaginate %}
+</div> <!-- /.blog-main -->
+
+<script>
+$(document).ready(function() {
+    $('.post-slider').each(function(){
+      $(this).find('img').wrap('<div class="item"></div>');
+      $(this).find('.item').wrapAll('<div class="bxslider" />');
+    });
+    $('.bxslider').each(function(){
+        $(this).slick({
+            centerMode: true,
+            slidesToShow: 1,
+            infinite: true,
+            arrows: true,
+            initialSlide: 1,
+            variableWidth: true
+        });
+    });
+    
+});
+</script>

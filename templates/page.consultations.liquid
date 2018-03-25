@@ -1,0 +1,116 @@
+<!-- /templates/page.consultations.liquid -->
+<div class="grid">
+  
+  <div class="grid__item">
+
+    <header class="section-header text-center">
+      <h2>{{ page.title }}</h2>
+      {% if page.metafields.c_f.subtext %}
+        <h1>{{ page.metafields.c_f.subtext }}</h1>
+      {% endif %}
+    </header>
+
+    <div class="grid">
+
+      <div class="grid__item">
+        <hr class="hr--large">
+        {% for article in blogs["about"].articles limit: 1 %}
+          <div class="post-slider caption">
+            {{ article.excerpt }}
+          </div>
+        {% endfor %}
+        {% section 'slider' %}
+      </div>
+
+      <div class="grid__item large--three-fifths push--large--two-tenths">
+        <div class="rte rte--nomargin rte--indented-images">
+          {{ page.content }}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grid">
+
+      <div class="grid__item large--four-tenths push--large--three-tenths">
+
+        <div class="form-vertical">
+
+          <header class="section-header text-center">
+            <h1>Let's chat about plants</h1>
+          </header>
+
+          {% form 'contact' %}
+
+            {% comment %}
+              Successful message
+            {% endcomment %}
+            {% if form.posted_successfully? %}
+              <p class="note form-success">
+                {{ 'contact.form.post_success' | t }}
+              </p>
+            {% endif %}
+
+            {{ form.errors | default_errors }}
+
+            <label for="ContactFormName">{{ 'contact.consult_form.name' | t }}</label>
+            <input type="text" id="ContactFormName" class="input-full" name="contact[name]" placeholder="" autocapitalize="words" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+            <label for="ContactFormEmail">{{ 'contact.consult_form.email' | t }}</label>
+            <input type="email" id="ContactFormEmail" class="input-full" name="contact[email]" placeholder="" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+
+            <label for="ContactFormPhone">{{ 'contact.consult_form.phone' | t }}</label>
+            <input type="tel" id="ContactFormPhone" class="input-full" name="contact[phone]" placeholder="" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+
+            <label for="contactFormJobType">{{ 'contact.consult_form.job-type' | t }}</label>
+              <select id="contactFormJobType" class="input-full" name="contact[job type]">
+                <option>{{ 'contact.consult_form.location-one' | t }}</option>
+                <option>{{ 'contact.consult_form.location-two' | t }}</option>
+                <option>{{ 'contact.consult_form.location-three' | t }}</option>
+              </select>
+
+            <label for="contactFormBudget">{{ 'contact.consult_form.budget' | t }}</label>
+              <select id="contactFormBudget" class="input-full" name="contact[budget]">
+                <option>{{ 'contact.consult_form.range-one' | t }}</option>
+                <option>{{ 'contact.consult_form.range-two' | t }}</option>
+                <option>{{ 'contact.consult_form.range-three' | t }}</option>
+                <option>{{ 'contact.consult_form.range-four' | t }}</option>
+                <option>{{ 'contact.consult_form.range-five' | t }}</option>
+              </select>
+
+            <label for="ContactFormMessage">{{ 'contact.consult_form.message' | t }}</label>
+            <textarea rows="10" id="ContactFormMessage" class="input-full" name="contact[body]" placeholder="">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+            <input type="submit" class="btn right" value="{{ 'contact.consult_form.send' | t }}">
+
+          {% endform %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('.post-slider').each(function(){
+      $(this).find('img').wrap('<div class="item"></div>');
+      $(this).find('.item').wrapAll('<div class="bxslider" />');
+    });
+    $('.bxslider').each(function(){
+        $(this).slick({
+            centerMode: true,
+            centerPadding: '15px',
+            slidesToShow: 1,
+            infinite: true,
+            arrows: true,
+            initialSlide: 1,
+            variableWidth: true
+        });
+    });
+    
+});
+</script>

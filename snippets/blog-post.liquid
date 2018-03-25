@@ -1,0 +1,26 @@
+<div class="article">
+
+    <div class="post-info">
+        <h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+    </div>
+
+    <div class="post-content">
+        {% if article.excerpt.size > 0 %}
+             <div class="post-slider">
+                {{ article.excerpt }}
+            </div>
+        {% endif %}
+
+        <div class="description">
+            {{ article.content }}
+        </div>
+        
+    </div> <!-- /.content -->
+
+</div> <!-- /.article -->
+
+{% if template == 'article' and blog.title == 'About' %}
+   <script>
+      window.document.location.href = "/blogs/about";
+   </script>
+{% endif %}

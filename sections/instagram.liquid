@@ -1,0 +1,32 @@
+<header class="section-header">
+  <h1>{{ section.settings.instagram_feed_title }}{% if section.settings.instagram_feed_title_msg != blank %}<span class="hidden-msg">{% if section.settings.instagram_feed_username %}<a href="https://www.instagram.com/{{ section.settings.instagram_feed_username }}" target="_blank">{% endif %}{{ section.settings.instagram_feed_title_msg }}{% if section.settings.instagram_feed_username %}</a>{% endif %}</span>{% endif %}</h1>
+</header>
+
+<hr class="hr--large">
+<div id="instafeed" class="grid"></div>
+
+{% schema %}
+  {
+    "name": "Instagram Feed",
+    "settings": [
+  		{
+    		"type": "text",
+    		"id": "instagram_feed_title",
+    		"label": "Instagram title",
+    		"default": "Follow Us on Instagram"
+  		},
+  		{
+        "type": "text",
+        "id": "instagram_feed_title_msg",
+        "label": "Instagram title hidden message",
+        "default": "@forageplants"
+      },
+      {
+        "type": "text",
+        "id": "instagram_feed_username",
+        "label": "Instagram username",
+        "default": "forageplants"
+      }
+    ]
+  }
+{% endschema %}

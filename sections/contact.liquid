@@ -1,0 +1,60 @@
+<header class="section-header">
+  <h2>{{ page.title }}</h2>
+  {% if section.settings.page_subtitle %}
+    <h1>{{ section.settings.page_subtitle }}</h1>
+  {% endif %}
+</header>
+
+<div class="grid">
+
+  <div class="rte grid__item one-half">
+    {% if section.settings.contact_locations %}
+      <h3>Locations</h3>
+      {{ section.settings.contact_locations }}
+    {% endif %}
+    {% if section.settings.contact_info %}
+      <h3>Get In Touch</h3>
+      {{ section.settings.contact_info }}
+    {% endif %}
+  </div>
+
+  <div class="rte grid__item one-half">
+    {% if section.settings.contact_hours %}
+      <h3>Hours</h3>
+      {{ section.settings.contact_hours }}
+    {% endif %}          
+  </div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Content",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_subtitle",
+        "label": "Subtitle",
+        "default": "When you need some green in your life, or your cat just ate your fern...again."
+      },
+      {
+        "type": "richtext",
+        "id": "contact_locations",
+        "label": "Locations",
+        "default": "<p>Add content here</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "contact_info",
+        "label": "Contact Info",
+        "default": "<p>Add content here</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "contact_hours",
+        "label": "Store Hours",
+        "default": "<p>Add content here</p>"
+      }
+    ]
+  }
+{% endschema %}

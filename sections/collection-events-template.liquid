@@ -1,0 +1,201 @@
+<!-- /templates/collection.liquid -->
+
+<div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template" data-grid-type="{{ section.settings.collection_products_grid }}">
+  {% include 'collection-template' %}
+</div>
+
+<div class="grid">
+
+  <div class="grid__item large--four-tenths push--large--three-tenths">
+
+    <div class="form-vertical">
+
+      <header class="section-header text-center">
+        <div class="form-title">
+          <h1>{% if section.settings.form_contact_title_msg != blank %}<span class="hidden-msg-above">{{ section.settings.form_contact_title_msg }}</span>{% endif %}{{ section.settings.form_contact_title }}</h1>
+        </div>
+      </header>
+
+      {% form 'contact' %}
+
+        {% comment %}
+          Successful message
+        {% endcomment %}
+        {% if form.posted_successfully? %}
+          <p class="note form-success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+
+        {{ form.errors | default_errors }}
+
+        <div class="form-group">
+          <label for="ContactFormName">{{ section.settings.form_contact_name }}{% if section.settings.form_contact_name_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_name_msg }}</span>{% endif %}</label>
+          <input type="text" id="ContactFormName" class="input-full" name="contact[name]" placeholder="" autocapitalize="words" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+          <label for="ContactFormEmail">{{ section.settings.form_contact_email }}{% if section.settings.form_contact_email_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_email_msg }}</span>{% endif %}</label>
+          <input type="email" id="ContactFormEmail" class="input-full" name="contact[email]" placeholder="" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+        </div>
+
+        <div class="form-group">
+          <label for="contactFormEventType">{{ section.settings.form_contact_type }}{% if section.settings.form_contact_type_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_type_msg }}</span>{% endif %}</label>
+            <select id="contactFormEventType" class="input-full" name="contact[event type]">
+              <option>{{ section.settings.form_contact_type_one }}</option>
+              <option>{{ section.settings.form_contact_type_two }}</option>
+              <option>{{ section.settings.form_contact_type_three }}</option>
+            </select>
+          </div>
+
+        <div class="form-group">
+          <label for="ContactEventDate">{{ section.settings.form_contact_date }}{% if section.settings.form_contact_date_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_date_msg }}</span>{% endif %}</label>
+          <input type="text" id="ContactEventDate" class="input-full" name="contact[date]" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="ContactFormPeople">{{ section.settings.form_contact_guests }}{% if section.settings.form_contact_guests_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_guests_msg }}</span>{% endif %}</label>
+          <input type="text" id="ContactFormPeople" class="input-full" name="contact[number of people]" placeholder="">
+        </div>
+
+        <div class="form-group">
+          <label for="ContactFormMessage">{{ section.settings.form_contact_message }}{% if section.settings.form_contact_message_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_message_msg }}</span>{% endif %}</label>
+          <textarea rows="10" id="ContactFormMessage" class="input-full" name="contact[event details]" placeholder="">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+
+        <input type="submit" class="btn right" value="{{ section.settings.form_contact_submit }}">
+
+      {% endform %}
+
+    </div>
+
+  </div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "Event page",
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_products_grid",
+        "label": "Grid style",
+        "options": [
+          {
+            "value": "grid",
+            "label": "Grid"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Form Content"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_title",
+        "label": "Form title",
+        "default": "Request your own event here!"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_title_msg",
+        "label": "Form title hidden message"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_name",
+        "label": "Name label",
+        "default": "What is your name?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_name_msg",
+        "label": "Name hidden message",
+        "default": "Don't forget to tell us who you are"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_email",
+        "label": "Email label",
+        "default": "What is your email?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_email_msg",
+        "label": "Email hidden message",
+        "default": "We need a way to reply!"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type",
+        "label": "Event type label",
+        "default": "What kind of event do you want?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type_msg",
+        "label": "Event type hidden message"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type_one",
+        "label": "Event type 1",
+        "default": "Private Terrarium Workshop"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type_two",
+        "label": "Event type 2",
+        "default": "Private Floral Design Workshop"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type_three",
+        "label": "Event type 3",
+        "default": "Other Private Event"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_date",
+        "label": "Date label",
+        "default": "Event date"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_date_msg",
+        "label": "Date hidden message"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_guests",
+        "label": "Guests label",
+        "default": "How many people?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_guests_msg",
+        "label": "Guests hidden message"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_message",
+        "label": "Message label",
+        "default": "Tell us about your event ideas."
+      },
+      {
+        "type": "text",
+        "id": "form_contact_message_msg",
+        "label": "Message hidden message",
+        "default": "Don't be shy"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_submit",
+        "label": "Submit button text",
+        "default": "Send your message to a human at Forage"
+      }
+    ]
+  }
+{% endschema %}

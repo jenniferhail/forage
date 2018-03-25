@@ -1,0 +1,46 @@
+{% if section.blocks.size > 0 %}
+  <div class="bxslider">
+    {% for block in section.blocks %}
+      <div class="item slick-slide">
+        
+        {% if block.settings.image != blank %}
+          <img src="{{  block.settings.image | img_url: '2048x2048' | format: 'jpg' }}"{% if block.settings.slide_caption %} title="{{ block.settings.slide_caption }}"{% endif %}>
+          {% if block.settings.slide_caption %}
+            <div class="bx-caption"><span>{{ block.settings.slide_caption }}</span></div>
+          {% endif %}
+        {% else %}
+          <div class="placeholder-background">
+            {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+            {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Slideshow",
+    "blocks" : [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "slide_caption",
+            "label": "Image caption"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

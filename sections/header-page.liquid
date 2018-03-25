@@ -1,0 +1,20 @@
+<header class="section-header text-center">
+  <h2>{{ page.title }}</h2>
+  {% if section.settings.page_subtitle != blank %}
+    <h1>{{ section.settings.page_subtitle }}</h1>
+  {% endif %}
+</header>
+
+{% schema %}
+  {
+    "name": "Page Header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_subtitle",
+        "label": "Subtitle",
+        "default": "Write a witty subtitle here."
+      }
+    ]
+  }
+{% endschema %}

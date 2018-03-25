@@ -1,0 +1,314 @@
+<footer class="site-footer small--text-center" role="contentinfo">
+  <div class="wrapper">
+
+    <div class="one-whole">
+      {% comment %}
+        Use the uploaded logo from theme settings if enabled.
+        Site name gets precedence with H1 tag on homepage, div on other pages.
+      {% endcomment %}
+      {% if template == 'index' %}
+        <h1 class="site-footer__logo" itemscope itemtype="http://schema.org/Organization">
+      {% else %}
+        <div class="h1 site-footer__logo" itemscope itemtype="http://schema.org/Organization">
+      {% endif %}
+        {% if section.settings.footer_logo %}
+          {% comment %}
+            .logo--has-inverted is only applied to the default logo if the inverted logo exists. That way it'll only be hidden on the slider when it has a backup.
+          {% endcomment %}
+          <a href="/" itemprop="url" class="site-footer__logo-link">
+            {% if section.settings.footer_logo_max_width != empty %}
+              {% capture image_size %}{{ section.settings.footer_logo_max_width }}x{% endcapture %}
+            {% else %}
+              {% assign image_size = "270x" %}
+            {% endif %}
+             <img src="{{ section.settings.footer_logo | img_url: image_size }}"
+             srcset="{{ section.settings.footer_logo | img_url: image_size }} 1x, {{ section.settings.footer_logo | img_url: image_size, scale: 2 }} 2x"
+             alt="{{ section.settings.footer_logo.alt | default: shop.name }}"
+             itemprop="logo">
+          </a>
+        {% else %}
+          <a href="/" itemprop="url">{{ shop.name }}</a>
+        {% endif %}
+      {% if template == 'index' %}
+        </h1>
+      {% else %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="grid-uniform">
+
+      {% comment %}
+        Default to 1 footer column (copyright/powered_by/payment_types)
+      {% endcomment %}
+      {% assign num_footer_columns = 1 %}
+
+      {% comment %}
+        Create an extra menu column if link list has more than 5 links
+      {% endcomment %}
+      {% if linklists[section.settings.footer_link_list].links.size > 0 %}
+        {% comment %}
+          We have a Footer menu that isn't empty, we will need another column
+        {% endcomment %}
+        {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+        {% assign extra_footer_linklist_column = false %}
+        {% assign footer_linklist_count = linklists[section.settings.footer_link_list].links.size %}
+        {% if footer_linklist_count > 5 %}
+          {% assign extra_footer_linklist_column = true %}
+          {% comment %}
+            We split the links so we'll need another column
+          {% endcomment %}
+          {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+        {% endif %}
+        {% comment %}
+          If we have an odd amount of links, we need to show 1 more link in 1st column
+        {% endcomment %}
+        {% assign extra_link = footer_linklist_count | modulo: 2 %}
+        {% comment %}
+          We start with a 2nd column after first column is filled up.
+        {% endcomment %}
+        {% assign footer_linklist_split = footer_linklist_count | divided_by: 2 | plus: extra_link | plus: 1 %}
+      {% endif %}
+
+      {% comment %}
+        Determine whether there are social links
+      {% endcomment %}
+      {% assign footer_social_enable = false %}
+      {% if
+        settings.social_twitter_link != blank
+        or settings.social_facebook_link != blank
+        or settings.social_pinterest_link != blank
+        or settings.social_google_plus_link != blank
+        or settings.social_instagram_link != blank
+        or settings.social_tumblr_link != blank
+        or settings.social_youtube_link != blank
+        or settings.social_vimeo_link != blank
+        or settings.social_fancy_link != blank
+        or settings.social_snapchat_link != blank
+      %}
+        {% assign footer_social_enable = true %}
+      {% endif %}
+
+      {% comment %}
+        Calculate the number of footer columns shown. Default to 1.
+      {% endcomment %}
+      {% if footer_social_enable %}
+        {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+      {% endif %}
+
+      {% case num_footer_columns %}
+        {% when 0 %}
+        {% when 1 %}
+          {% assign footer_column_width = '' %}
+        {% when 2 %}
+          {% assign footer_column_width = 'one-half small--one-whole' %}
+        {% when 3 %}
+          {% assign footer_column_width = 'one-third small--one-whole medium--one-half' %}
+        {% when 4 %}
+          {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
+        {% when 5 %}
+          {% assign footer_column_width = 'large--one-fifth medium--one-half' %}
+      {% endcase %}
+
+      {% if section.settings.footer_hours != blank %}
+        <div class="grid__item {{ footer_column_width }}">
+            {% if section.settings.footer_hours_title != blank %}
+              <span class="footer-heading">{{ section.settings.footer_hours_title }}</span>
+            {% endif %}
+            {% if section.settings.footer_hours != blank %}
+              <p>{{ section.settings.footer_hours }}</p>
+            {% endif %}
+        </div>
+      {% endif %}
+
+      {% if linklists[section.settings.footer_link_list].links.size > 0 %}
+        <div class="grid__item {{ footer_column_width }}">
+          {% if section.settings.footer_menu_title != blank %}
+            <span class="footer-heading">{{ section.settings.footer_menu_title }}</span>
+          {% endif %}
+          <ul class="no-bullets site-footer__linklist">
+            {% for link in linklists[section.settings.footer_link_list].links %}
+
+      {% comment %}
+        Create a second column
+      {% endcomment %}
+      {% if extra_footer_linklist_column and forloop.index == footer_linklist_split %}
+          </ul>
+        </div>
+        <div class="grid__item {{ footer_column_width }}">
+          <ul class="no-bullets site-footer__linklist">
+      {% endif %}
+
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if footer_social_enable %}
+        <div class="grid__item {{ footer_column_width }}">
+        {% if section.settings.footer_socialmedia_title != blank %}
+          <span class="footer-heading">{{ section.settings.footer_socialmedia_title }}</span>
+        {% endif %}
+            <ul class="no-bullets social-icons">
+              {% if settings.social_facebook_link != blank %}
+                <li>
+                  <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">Facebook</a>
+                </li>
+              {% endif %}
+              {% if settings.social_twitter_link != blank %}
+                <li>
+                  <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                    {% comment %}<span class="icon icon-twitter" aria-hidden="true"></span>{% endcomment %}
+                    Twitter
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_pinterest_link != blank %}
+                <li>
+                  <a href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
+                    {% comment %}<span class="icon icon-pinterest" aria-hidden="true"></span>{% endcomment %}
+                    Pinterest
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_instagram_link != blank %}
+                <li>
+                  <a href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+                    {% comment %}<span class="icon icon-instagram" aria-hidden="true"></span>{% endcomment %}
+                    Instagram
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_snapchat_link != blank %}
+                <li>
+                  <a href="{{ settings.social_snapchat_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Snapchat' }}">
+                    {% comment %}<span class="icon icon-snapchat" aria-hidden="true"></span>{% endcomment %}
+                    Snapchat
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_google_plus_link != blank %}
+                <li>
+                  <a href="{{ settings.social_google_plus_link }}" rel="publisher" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Google Plus' }}">
+                    {% comment %}<span class="icon icon-google_plus" aria-hidden="true"></span>{% endcomment %}
+                    Google Plus
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_tumblr_link != blank %}
+                <li>
+                  <a href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
+                    {% comment %}<span class="icon icon-tumblr" aria-hidden="true"></span>{% endcomment %}
+                    Tumblr
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_youtube_link != blank %}
+                <li>
+                  <a href="{{ settings.social_youtube_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
+                    {% comment %}<span class="icon icon-youtube" aria-hidden="true"></span>{% endcomment %}
+                    YouTube
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_vimeo_link != blank %}
+                <li>
+                  <a href="{{ settings.social_vimeo_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
+                    {% comment %}<span class="icon icon-vimeo" aria-hidden="true"></span>{% endcomment %}
+                    Vimeo
+                  </a>
+                </li>
+              {% endif %}
+              {% if settings.social_fancy_link != blank %}
+                <li>
+                  <a href="{{ settings.social_fancy_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
+                    {% comment %}<span class="icon icon-fancy" aria-hidden="true"></span>{% endcomment %}
+                    Fancy
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+        </div>
+      {% endif %}
+
+      <hr class="hr--clear">
+
+      <div class="endnotes text-center">
+        <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: '/' }}. All rights reserved.<br>
+          <span><a href="">Terms of Use</a></span>
+          <span><a href="">Privacy Policy</a></span>
+          <span>Site by <a href="http://www.bypine.co">Studio Pine</a></span>
+        </p>
+
+{% comment %}        {% unless shop.enabled_payment_types == empty %}
+          {% assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' %}
+          <ul class="inline-list payment-icons">
+            {% for type in shop.enabled_payment_types %}
+              {% if payment_icons_available contains type %}
+                <li>
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-{{ type }}" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ type | replace: '_',' ' }}</span>
+                  </span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endunless %}{% endcomment %}
+
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "footer_logo",
+        "label": "Logo image"
+      },  
+      {
+        "type": "text",
+        "id": "footer_logo_max_width",
+        "label": "Custom logo width (in pixels)",
+        "default": "270"
+      },
+      {
+        "type": "text",
+        "id": "footer_hours_title",
+        "label": "Store Hours Title",
+        "default": "Store Hours"
+      }, 
+      {
+        "type": "textarea",
+        "id": "footer_hours",
+        "label": "Store Hours",
+        "default": "Open 24/7"
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_title",
+        "label": "Menu Title",
+        "default": "Menu Title"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_link_list",
+        "label": "Footer menu",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_socialmedia_title",
+        "label": "Social Media Title",
+        "default": "Connect"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,25 @@
+<!-- /templates/page.contact.liquid -->
+<div class="grid">
+
+  <hr class="hr--large">
+
+  <div class="grid__item">
+    <div class="grid">
+      <div class="grid__item large--one-half small--one-whole">
+        {% include 'map' %}
+      </div>
+      <div class="grid__item large--one-half small--one-whole">
+        {% section 'contact' %}
+      </div>
+    </div>
+  </div> {% comment %} End .grid__item #{% endcomment %}
+
+  <div class="grid__item large--four-tenths push--large--three-tenths section-break">
+    {% section 'form-contact' %}
+  </div>
+  
+  <div class="grid__item one-whole section-break">
+    {% section 'instagram' %}
+  </div>
+
+</div>

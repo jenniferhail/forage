@@ -1,0 +1,120 @@
+<div class="form-vertical">
+
+  <header class="section-header text-center">
+    <div class="form-title">
+      <h1>{% if section.settings.form_contact_title_msg != blank %}<span class="hidden-msg-above">{{ section.settings.form_contact_title_msg }}</span>{% endif %}{{ section.settings.form_contact_title }}</h1>
+    </div>
+  </header>
+
+  {% form 'contact' %}
+
+    {% comment %}
+      Successful message
+    {% endcomment %}
+    {% if form.posted_successfully? %}
+      <p class="note form-success">
+        {{ 'contact.form.post_success' | t }}
+      </p>
+    {% endif %}
+
+    {{ form.errors | default_errors }}
+
+    <div class="form-group">
+      <label for="ContactFormName">{{ section.settings.form_contact_name }}{% if section.settings.form_contact_name_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_name_msg }}</span>{% endif %}</label>
+      <input type="text" id="ContactFormName" class="input-full" name="contact[name]" placeholder="" autocapitalize="words" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+    </div>
+
+    <div class="form-group">
+      <label for="ContactFormEmail">{{ section.settings.form_contact_email }}{% if section.settings.form_contact_email_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_email_msg }}</span>{% endif %}</label>
+      <input type="email" id="ContactFormEmail" class="input-full" name="contact[email]" placeholder="" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+    </div>
+
+    <div class="form-group">
+      <label for="ContactFormPhone">{{ section.settings.form_contact_phone }}{% if section.settings.form_contact_phone_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_phone_msg }}</span>{% endif %}</label>
+      <input type="tel" id="ContactFormPhone" class="input-full" name="contact[phone]" placeholder="" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+    </div>
+
+    <div class="form-group">
+      <label for="ContactFormMessage">{{ section.settings.form_contact_message }}{% if section.settings.form_contact_message_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_message_msg }}</span>{% endif %}</label>
+      <textarea rows="10" id="ContactFormMessage" class="input-full" name="contact[body]" placeholder="">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+    </div>
+
+    <input type="submit" class="btn right" value="{{ section.settings.form_contact_submit }}">
+
+  {% endform %}
+
+</div>
+
+{% schema %}
+  {
+    "name": "Contact Form",
+    "settings": [
+      {
+        "type": "text",
+        "id": "form_contact_title",
+        "label": "Form title",
+        "default": "Let's chat about plants"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_title_msg",
+        "label": "Form title hidden message",
+        "default": "Keep it green"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_name",
+        "label": "Name label",
+        "default": "What is your name?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_name_msg",
+        "label": "Name hidden message",
+        "default": "Don't forget to tell us who you are"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_email",
+        "label": "Email label",
+        "default": "What is your email?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_email_msg",
+        "label": "Email hidden message",
+        "default": "We need a way to reply!"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_phone",
+        "label": "Phone label",
+        "default": "What is your phone number?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_phone_msg",
+        "label": "Phone hidden message",
+        "default": "Let's get your digits"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_message",
+        "label": "Message label",
+        "default": "So what's up?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_message_msg",
+        "label": "Message hidden message",
+        "default": "Don't be shy"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_submit",
+        "label": "Submit button text",
+        "default": "Send your message to a human at Forage"
+      }
+    ]
+  }
+{% endschema %}

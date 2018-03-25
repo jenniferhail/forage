@@ -1,0 +1,28 @@
+{% if section.settings.banner_text %}
+  <div class="grid banner-wrapper">
+    <div class="grid__item banner">
+      <p><a href="{{ section.settings.banner_link }}">{{ section.settings.banner_text }}</a></p>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Banner",
+    "class": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "banner_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "banner_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      }
+    ]
+  }
+{% endschema %}
