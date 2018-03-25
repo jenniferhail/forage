@@ -1,0 +1,323 @@
+{
+  "current": {
+    "color_body_bg": "#ffffff",
+    "color_body_text": "#1c1d1d",
+    "color_sub_text": "#c4c2bc",
+    "caption_color": "#c4c2bc",
+    "color_borders": "#b19565",
+    "color_primary": "#b19565",
+    "color_secondary": "#b19565",
+    "color_product_background": "#f1f1f1",
+    "color_sale_tag": "#b19565",
+    "color_input": "rgba(0,0,0,0)",
+    "color_newsletter": "#f6f6f6",
+    "color_drawer_background": "#1c1d1d",
+    "color_drawer_text": "#ffffff",
+    "color_drawer_border": "#343535",
+    "color_drawer_button": "#1c1d1d",
+    "color_drawer_button_text": "#ffffff",
+    "type_header_family": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+    "type_header_base_size": "34px",
+    "type_header_border_thickness": "1px",
+    "type_accent_family": "sweet_sansregular",
+    "type_accent_transform": true,
+    "type_accent_spacing": true,
+    "type_base_family": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+    "type_base_size": "16px",
+    "type_base_italize_titles": true,
+    "caption_font": "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif",
+    "caption_size": "14px",
+    "caption_align": "left",
+    "caption_ital": true,
+    "cart_type": "page",
+    "cart_notes_enable": false,
+    "social_facebook_link": "https:\/\/www.facebook.com\/foragelouisville",
+    "social_twitter_link": "",
+    "social_pinterest_link": "https:\/\/www.pinterest.com\/jamiefairman",
+    "social_instagram_link": "https:\/\/instagram.com\/forage_shop",
+    "social_snapchat_link": "",
+    "social_google_plus_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "social_fancy_link": "",
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "favicon": "shopify:\/\/shop_images\/favicon_499bd3cd-13ec-44c1-9f57-de031b23269c.png",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Forage_Logo_Black-Shopify.png",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "Helvetica Neue",
+    "checkout_body_font": "Helvetica Neue",
+    "checkout_accent_color": "#a26b25",
+    "checkout_button_color": "#000000",
+    "checkout_error_color": "#ff6d6d",
+    "checkout_banner_background_color": "#fff",
+    "checkout_call_to_action_color": "#a26b25",
+    "checkout_use_header_image": false,
+    "collection_products_grid": "collage",
+    "collection_sort_enable": false,
+    "collection_tags_enable": true,
+    "customer_layout": "customer_area",
+    "favicon_enable": false,
+    "footer_newsletter_enable": true,
+    "footer_quicklinks_enable": true,
+    "header_search_enable": false,
+    "hero_home_auto": true,
+    "home_featured_collections_sort": "auto",
+    "home_featured_products_grid": "collage",
+    "home_hero_auto_speed": "7000",
+    "product_vendor_enable": false,
+    "product_zoom_enable": true,
+    "social_sharing_style": "clean",
+    "sections": {
+      "slideshow": {
+        "type": "slideshow",
+        "blocks": {
+          "1482488005480": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Banner-One.jpg",
+              "slide_text_color": "is-dark",
+              "slide_subheading": "",
+              "slide_heading": "Receive 10% off your first purchase!",
+              "slide_cta": "I dig that",
+              "slide_link": ""
+            }
+          },
+          "slideshow-0": {
+            "type": "slide",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Banner-Two.jpg",
+              "slide_text_color": "is-dark",
+              "slide_subheading": "",
+              "slide_heading": "Receive 10% off your first purchase!",
+              "slide_cta": "I dig that",
+              "slide_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "1482488005480",
+          "slideshow-0"
+        ],
+        "settings": {
+          "hero_home_auto": false,
+          "home_hero_auto_speed": "5000"
+        }
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "title": "Our Best Sellers",
+          "home_featured_products": "frontpage",
+          "collection_products_grid": "grid"
+        }
+      },
+      "drawer-menu": {
+        "type": "drawer-menu",
+        "settings": {
+          "drawer_top_link_list": "main-menu",
+          "drawer_bottom_link_list": "footer"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "main_menu_link_list": "main-menu",
+          "logo": "shopify:\/\/shop_images\/Forage_Logo_Black-Shopify.png",
+          "logo-inverted": "shopify:\/\/shop_images\/Forage_Logo_White.png",
+          "logo_max_width": "100",
+          "header_search_enable": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer_logo": "shopify:\/\/shop_images\/Forage-Footer-Logo.png",
+          "footer_logo_max_width": "200",
+          "footer_hours_title": "Store Hours",
+          "footer_hours": "Tues – Fri  10 am – 6 pm<br>\r\nSat 10 am – 5 pm<br>\r\nSun 10 am – 4 pm",
+          "footer_menu_title": "Info",
+          "footer_link_list": "footer",
+          "footer_socialmedia_title": "Connect"
+        }
+      },
+      "1482202119771": {
+        "type": "featured-products",
+        "settings": {
+          "title": "Events You Don't Want to Miss",
+          "home_featured_products": "events",
+          "collection_products_grid": "collage"
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "zoom_enable": true,
+          "social_sharing_products": true,
+          "product_vendor_enable": false
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "collection_products_grid": "grid",
+          "collection_tags_enable": false,
+          "product_vendor_enable": false
+        }
+      },
+      "collection-image-template": {
+        "type": "collection-image-template",
+        "settings": {
+          "collection_products_grid": "grid",
+          "collection_tags_enable": false,
+          "product_vendor_enable": false
+        }
+      },
+      "collection-events-template": {
+        "type": "collection-events-template",
+        "settings": {
+          "collection_products_grid": "grid",
+          "collection_tags_enable": false,
+          "product_vendor_enable": false
+        }
+      }
+    },
+    "content_for_index": [
+      "featured-products",
+      "1482202119771"
+    ]
+  },
+  "presets": {
+    "Brooklyn": {
+      "cart_type": "drawer",
+      "cart_notes_enable": false,
+      "checkout_accent_color": "#a26b25",
+      "checkout_banner_background_color": "#fff",
+      "checkout_button_color": "#000000",
+      "checkout_call_to_action_color": "#a26b25",
+      "checkout_use_header_image": false,
+      "collection_products_grid": "collage",
+      "collection_sort_enable": false,
+      "collection_tags_enable": true,
+      "color_body_bg": "#ffffff",
+      "color_body_text": "#1c1d1d",
+      "color_borders": "#1c1d1d",
+      "color_drawer_background": "#1c1d1d",
+      "color_drawer_border": "#343535",
+      "color_drawer_button": "#a26b25",
+      "color_drawer_button_text": "#ffffff",
+      "color_drawer_text": "#ffffff",
+      "color_input": "#f6f6f6",
+      "color_newsletter": "#f6f6f6",
+      "color_primary": "#1c1d1d",
+      "color_product_background": "#f7f7f7",
+      "color_sale_tag": "#990000",
+      "color_secondary": "#a26b25",
+      "customer_layout": "customer_area",
+      "favicon_enable": false,
+      "footer_newsletter_enable": true,
+      "footer_quicklinks_enable": true,
+      "header_search_enable": false,
+      "hero_home_auto": true,
+      "home_featured_collections_sort": "auto",
+      "home_featured_products_grid": "collage",
+      "home_hero_auto_speed": "7000",
+      "product_vendor_enable": false,
+      "product_zoom_enable": true,
+      "share_facebook": true,
+      "share_pinterest": true,
+      "share_twitter": true,
+      "social_sharing_style": "clean",
+      "type_accent_family": "Google_Montserrat_400_sans",
+      "type_accent_spacing": true,
+      "type_accent_transform": true,
+      "type_base_family": "Google_Arapey_400_serif",
+      "type_base_italize_titles": true,
+      "type_base_size": "16px",
+      "type_header_base_size": "30px",
+      "type_header_border_thickness": "1px",
+      "type_header_family": "Google_Old+Standard+TT_400_serif",
+      "sections": {
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "slide",
+              "settings": {}
+            },
+            "slideshow-1": {
+              "type": "slide",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "slideshow-1"
+          ],
+          "settings": {}
+        },
+        "featured-products": {
+          "type": "featured-products",
+          "settings": {
+            "home_featured_products": "frontpage"
+          }
+        },
+        "featured-content": {
+          "type": "featured-content",
+          "blocks": {
+            "featured-content-0": {
+              "type": "text",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "featured-content-0"
+          ],
+          "settings": {}
+        },
+        "featured-collections": {
+          "type": "featured-collections",
+          "blocks": {
+            "featured-collections-0": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-1": {
+              "type": "collection",
+              "settings": {}
+            },
+            "featured-collections-2": {
+              "type": "collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "featured-collections-0",
+            "featured-collections-1",
+            "featured-collections-2"
+          ],
+          "settings": {}
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "featured-content",
+        "featured-collections",
+        "featured-products",
+        "newsletter"
+      ]
+    }
+  }
+}
