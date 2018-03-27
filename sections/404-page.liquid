@@ -1,0 +1,50 @@
+<header class="section-header text-center">
+  {% if section.settings.page_title != blank %}
+    <h2>{{ section.settings.page_title }}</h2>
+  {% endif %}
+  {% if section.settings.page_subtitle != blank %}
+    <h1>{{ section.settings.page_subtitle }}</h1>
+  {% endif %}
+</header>
+
+{% if section.settings.button_text %}
+  <div class="section-header text-center">
+    <a href="{{ section.settings.button_link }}" class="btn btn--page">{{ section.settings.button_text }}</a>
+{% comment %}    <hr class="hr--medium">{% endcomment %}
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Page Header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "page_title",
+        "label": "Title",
+        "default": "Write a short title here."
+      },
+      {
+        "type": "text",
+        "id": "page_subtitle",
+        "label": "Subtitle",
+        "default": "Write a witty subtitle here."
+      },
+      {
+        "type": "header",
+        "content": "Button"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Keep shopping"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }    
+    ]
+  }
+{% endschema %}
