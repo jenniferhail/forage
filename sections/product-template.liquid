@@ -151,7 +151,7 @@
                 {% endfor %}
               {% endunless %}
 
-              <select name="id" id="ProductSelect" class="product-single__variants no-js">
+              <select name="id" id="ProductSelect" class="product-single__variants no-js product-form__item">
                 {% for variant in product.variants %}
                   {% if variant.available %}
                     <option {% if variant == product.selected_or_first_available_variant %}
@@ -168,12 +168,13 @@
                 {% endfor %}
               </select>
 
-              {% comment %}
-              <div class="product-single__quantity">
-                <label for="Quantity" class="product-single__quantity-label js-quantity-selector">{{ 'products.product.quantity' | t }}</label>
-                <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
-              </div>
-              {% endcomment %}
+              {% if product.available %}
+                <div class="product-single__quantity product-form__item">
+                  <label for="Quantity" class="product-single__quantity-label">{{ 'products.product.quantity' | t }}</label>
+                  <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
+                </div>
+              {% endif %}
+              
 
               <div class="product-single__add-to-cart">
                 <button type="submit" name="add" id="AddToCart" class="btn"{% unless product.available %} disabled="disabled"{% endunless %}>

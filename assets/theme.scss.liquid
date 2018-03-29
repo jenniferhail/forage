@@ -174,6 +174,17 @@
   {% endif %}
 }
 
+@mixin sweetRegular {
+  font-family: $sweetRegular;
+  font-style: normal;
+  {% if settings.type_accent_spacing %}
+    letter-spacing: 0.15em;
+  {% endif %}
+  {% if settings.type_accent_transform %}
+    text-transform: uppercase;
+  {% endif %}
+}
+
 @mixin sweetMedium {
   font-family: $sweetMedium;
   font-style: normal;
@@ -483,7 +494,8 @@ $baseFontSize: {{ settings.type_base_size }}; // Henseforth known as 1em
 
 $accentFontStack: {{ accent_family }};
 
-$sansLight: sweet_sansLight;
+$sweetLight: sweet_sanslight;
+$sweetRegular: sweet_sansregular;
 $sweetMedium: sweet_sansmedium;
 $sweetBold: sweet_sansbold;
 
@@ -1128,6 +1140,10 @@ h6 {
 .h5 { @extend h5; }
 .h6 { @extend h6; }
 
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  line-height: 1.2;
+}
+
 /*================ Tables ================*/
 th,
 .table__title {
@@ -1497,8 +1513,12 @@ select:hover {
 }
 
 input[type="number"] {
-  @include accentFontStack;
-  font-size: em(16px);
+  @include sweetRegular;
+  font-size: em(13px);
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+     opacity: 1;
+  }
 }
 
 input[type="image"] {
@@ -1755,7 +1775,7 @@ a {
 }
 
 .return-link {
-  @include accentFontStack;
+  @include sweetRegular;
   font-size: em(14px);
 }
 
@@ -3242,6 +3262,7 @@ footer {
 .single-option-radio {
   border: 0;
   padding-top: 0;
+  margin: 0;
   position: relative;
   background-color: $colorBody;
 
@@ -3262,7 +3283,8 @@ footer {
     display: inline-block;
     line-height: 1;
     padding: 9px 11px;
-    margin: 3px 4px 1px 3px;
+    // margin: 3px 4px 1px 3px;
+    margin: 3px 0 1px 0;
     font-size: em(13px);
     font-style: normal;
     background-color: $colorBody;
@@ -3313,7 +3335,8 @@ footer {
   // }
 }
 
-.radio-wrapper .single-option-radio__label {
+.radio-wrapper .single-option-radio__label,
+.product-single__quantity-label {
   @include sweetMedium;
   font-size: em(15px);
   display: block;
@@ -3321,6 +3344,21 @@ footer {
   cursor: default;
   font-style: normal;
   color: $colorSecondary;
+}
+
+.product-single__quantity .js-quantity-selector, 
+.product-single__quantity .js-qty {
+  display: block;
+}
+
+.js-quantity-selector {
+  width: 100px;
+  font-size: 0.8125em;
+  padding: 9px 11px;
+}
+
+.product-single__add-to-cart {
+  margin: 65px 0 30px;
 }
 
 /*================ Module | Product Lightbox ================*/
@@ -3566,7 +3604,8 @@ button.mfp-arrow {
   }
 }
 
-.grid-product__image {
+.grid-product__image,
+.grid-product__image_event {
   display: block;
   margin: 0 auto;
 
@@ -3657,6 +3696,11 @@ button.mfp-arrow {
   white-space: nowrap;
 }
 
+.product-single__price,
+.product-single__price--compare-at {
+  @include sweetRegular;
+}
+
 .long-dash {
   margin: 0 4px;
 }
@@ -3674,6 +3718,14 @@ button.mfp-arrow {
 .grid-product__quantity,
 .grid-product__msg {
   color: $colorSecondary;
+}
+
+.grid-product__date {
+  margin-left: 8px;
+  &:before {
+    content: '—';
+    padding-right: 12px;
+  }
 }
 
 .product-grid-msg {
@@ -3729,7 +3781,7 @@ button.mfp-arrow {
 
 .grid-product__sold-out,
 .grid-product__on-sale {
-  @include accentFontStack;
+  @include sweetMedium;
   color: $colorSecondary;
   p {
     padding: 12px 8px 10px 9px;
@@ -4440,4 +4492,65 @@ button.mfp-arrow {
 
 .stick-this {
   margin-top: 30px;
+}
+
+// Fancybox
+
+.quickview {
+  max-width: 800px;
+  width: 60%;
+  img {
+    display: block;
+  }
+  .btn {
+    width: 100%;
+  }
+  .grid-product__date,
+  .grid-product__sold-out,
+  .grid-product__on-sale {
+    @include sweetRegular;
+    color: $colorTextSub;
+  }
+  .grid-product__date,
+  .grid-product__on-sale {
+    font-size: 1.125em;
+  }
+  #Quantity {
+    width: 100px;
+  }
+  .preview-quantity__label {
+    font-size: 0.9375em;
+  }
+  .product-form__item {
+    margin-top: 30px;
+  }
+  .product-single__description {
+    margin: 30px 0;
+  }
+}
+
+.fancybox-slide>* {
+  padding: 30px;
+}
+
+a.quickview-link:hover {
+  color: $colorBtnPrimary;
+}
+
+.fancybox-close-small {
+  &:after {
+    color: $colorTextSub;
+  }
+  &:hover:after {
+    color: $colorBtnPrimary;
+    background: none;
+  }
+}
+
+.fancybox-container {
+  font-family: $bodyFontStack;
+}
+
+.full-description {
+  font-style: italic;
 }
