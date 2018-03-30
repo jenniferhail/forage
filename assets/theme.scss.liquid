@@ -1372,7 +1372,7 @@ blockquote {
 /*================ Cart Typography ================*/
 .ajaxcart__product-name,
 .cart__product-name {
-  @include bodyFontItalic;
+  @include sweetMedium;
 }
 
 .ajaxcart__product-name {
@@ -1382,8 +1382,12 @@ blockquote {
 
 .ajaxcart__price,
 .cart__price,
-.cart__subtotal {
+.cart__subtotal,
+.ajaxcart__subtotal,
+.cart__header-labels {
   @include sweetRegular;
+  font-weight: inherit;
+  font-size: 16px;
 }
 
 .ajaxcart__price {
@@ -1399,10 +1403,6 @@ blockquote {
 .cart__discount {
   display: block;
   @include bodyFontItalic;
-}
-
-.ajaxcart__subtotal {
-  @include sweetRegular;
 }
 
 .ajaxcart__qty-num[type="text"] {
@@ -1421,6 +1421,28 @@ blockquote {
 .cart__savings {
   @include bodyFontItalic;
   font-size: em(20px);
+}
+
+// .cart__image img {
+//   width: 100px;
+//   max-width: 150px;
+// }
+
+.cart__remove a {
+  color: $colorTextSub;
+}
+
+.item-image {
+  width: 20%;
+}
+.item-details {
+  width: 80%;
+}
+
+.cart__left {
+  @include display-flexbox();
+  @include justify-content(flex-start);
+  @include align-items(flex-start);
 }
 
 /*================ Misc typography ================*/
@@ -2182,8 +2204,15 @@ $shareCountBg: $colorBody;
   margin: 100px 0 0;
 }
 
-#shopify-section-contact .section-header {
-  margin-top: 80px;
+// #shopify-section-contact,
+.template-page {
+  .section-header {
+    margin-top: 80px;
+  }
+}
+
+#about .section-header {
+  margin-top: 0;
 }
 
 /*================ Partials | Sections onboarding ================*/

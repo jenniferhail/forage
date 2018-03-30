@@ -10,8 +10,8 @@
   <div class="grid__item large--five-sixths push--large--one-twelfth">
     {% if cart.item_count > 0 %}
       <header class="section-header text-center">
-        <h1 class="text-center">{{ 'cart.general.title' | t }}</h1>
-        <hr class="hr--small">
+        <h2>{{ 'cart.general.title' | t }}</h2>
+        <h1>{{ 'cart.general.full' | t }}</h1>
       </header>
 
       <form action="/cart" method="post" novalidate class="cart">
@@ -41,18 +41,23 @@
               <div class="grid__item large--three-fifths">
                 <div class="grid">
 
-                  <div class="grid__item one-third">
+                  <div class="grid__item one-third item-image">
                     <a href="{{ item.url | within: collections.all }}" class="cart__image">
-
-                      {% comment %}
-                        More image size options at:
-                          - http://docs.shopify.com/themes/filters/product-img-url
-                      {% endcomment %}
-                      <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                      {% if item.product.type == "Event" %}
+                        {% assign featured_image = item.product.featured_image %}
+                        {% for image in item.product.images %}
+                          {% unless image contains featured_image %}
+                            <img src="{{ image.src | img_url: '150x150' }}" alt="{{ item.title | escape }}">
+                            {% break %}
+                          {% endunless %}
+                        {% endfor %}
+                      {% else %}
+                        <img src="{{ item | img_url: '150x150' }}" alt="{{ item.title | escape }}">
+                      {% endif %}
                     </a>
                   </div>
 
-                  <div class="grid__item two-thirds">
+                  <div class="grid__item two-thirds item-details">
                     <a href="{{ item.url }}" class="h4 cart__product-name">
                       {{ item.product.title }}
                     </a>
@@ -84,7 +89,7 @@
                       {% endfor %}
                     {% endif %}
 
-                    <p class="cart__product-meta">
+                    <p class="cart__product-meta cart__remove">
                       <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
                         {{ 'cart.general.remove' | t }}
                       </a>
@@ -155,6 +160,7 @@
                 <p class="cart__savings">{{ 'cart.general.savings_html' | t: savings: cartTotalDiscounts }}</p>
               {% endif %}
               <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+              <hr class="hr--small hr--clear">
               <button type="submit" name="update" class="btn--secondary update-cart">{{ 'cart.general.update' | t }}</button>
               <button type="submit" name="checkout" class="btn cart__checkout">
                 {{ 'cart.general.checkout' | t }} <span class="icon icon-arrow-right" aria-hidden="true"></span>
@@ -174,11 +180,11 @@
       {% comment %}
         The cart is empty
       {% endcomment %}
+
       <header class="section-header text-center">
-        <h1 class="text-center">{{ 'cart.general.title' | t }}</h1>
-        <hr class="hr--small">
-        <p>{{ 'cart.general.empty' | t }}</p>
-        <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+        <h2>{{ 'cart.general.title' | t }}</h2>
+        <h1>{{ 'cart.general.empty' | t }}</h1>
+        <a href="/collections/all" class="btn btn--page">{{ 'cart.general.continue_browsing_html' | t }}</a>
       </header>
 
     {% endif %}
