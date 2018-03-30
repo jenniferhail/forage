@@ -1,0 +1,209 @@
+<header class="section-header text-center">
+  <div class="form-title">
+    <h1>{% if section.settings.form_contact_title_msg != blank %}<span class="hidden-msg-above">{{ section.settings.form_contact_title_msg }}</span>{% endif %}{{ section.settings.form_contact_title }}</h1>
+  </div>
+</header>
+
+{% form 'contact' %}
+
+  {% comment %}
+    Successful message
+  {% endcomment %}
+  {% if form.posted_successfully? %}
+    <p class="note form-success">
+      {{ 'contact.form.post_success' | t }}
+    </p>
+  {% endif %}
+
+  {{ form.errors | default_errors }}
+
+  <div class="form-group">
+    <label for="ContactFormName">{{ section.settings.form_contact_name }}{% if section.settings.form_contact_name_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_name_msg }}</span>{% endif %}</label>
+    <input type="text" id="ContactFormName" class="input-full" name="contact[name]" placeholder="" autocapitalize="words" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+  </div>
+
+  <div class="form-group">
+    <label for="ContactFormEmail">{{ section.settings.form_contact_email }}{% if section.settings.form_contact_email_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_email_msg }}</span>{% endif %}</label>
+    <input type="email" id="ContactFormEmail" class="input-full" name="contact[email]" placeholder="" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+  </div>
+
+  <div class="form-group">
+    <label for="ContactFormPhone">{{ section.settings.form_contact_phone }}{% if section.settings.form_contact_phone_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_phone_msg }}</span>{% endif %}</label>
+    <input type="text" id="ContactFormPhone" class="input-full" name="contact[phone]" placeholder="">
+  </div>
+
+   <div class="form-group">
+    <label for="contactFormConsultType">{{ section.settings.form_consult_type }}{% if section.settings.form_consult_type_msg != blank %}<span class="hidden-msg">{{ section.settings.form_consult_type_msg }}</span>{% endif %}</label>
+      <select id="contactFormConsultType" class="input-full" name="contact[consult type]">
+        <option>{{ section.settings.form_contact_type_one }}</option>
+        <option>{{ section.settings.form_contact_type_two }}</option>
+        <option>{{ section.settings.form_contact_type_three }}</option>
+      </select>
+    </div>
+
+   <div class="form-group">
+    <label for="contactFormBudgetRange">{{ section.settings.form_budget_range }}{% if section.settings.form_budget_range_msg != blank %}<span class="hidden-msg">{{ section.settings.form_budget_range_msg }}</span>{% endif %}</label>
+      <select id="contactFormBudgetRange" class="input-full" name="contact[consult type]">
+        <option>{{ section.settings.form_contact_budget_one }}</option>
+        <option>{{ section.settings.form_contact_budget_two }}</option>
+        <option>{{ section.settings.form_contact_budget_three }}</option>
+        <option>{{ section.settings.form_contact_budget_four }}</option>
+        <option>{{ section.settings.form_contact_budget_five }}</option>
+      </select>
+    </div>
+
+  <div class="form-group">
+    <label for="ContactFormMessage">{{ section.settings.form_contact_message }}{% if section.settings.form_contact_message_msg != blank %}<span class="hidden-msg">{{ section.settings.form_contact_message_msg }}</span>{% endif %}</label>
+    <textarea rows="10" id="ContactFormMessage" class="input-full" name="contact[event details]" placeholder="">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+  </div>
+
+  <input type="submit" class="btn right" value="{{ section.settings.form_contact_submit }}">
+
+{% endform %}
+
+{% schema %}
+  {
+    "name": "Consultation page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Form Content"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_title",
+        "label": "Form title",
+        "default": "Let's chat about plants"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_title_msg",
+        "label": "Form title hidden message"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_name",
+        "label": "Name label",
+        "default": "What is your name?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_name_msg",
+        "label": "Name hidden message",
+        "default": "Don't forget to tell us who you are"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_email",
+        "label": "Email label",
+        "default": "What is your email?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_email_msg",
+        "label": "Email hidden message",
+        "default": "We need a way to reply!"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_phone",
+        "label": "Phone label",
+        "default": "What is your phone number?"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_phone_msg",
+        "label": "Phone hidden message",
+        "default": "Send us your digits"
+      },
+      {
+        "type": "text",
+        "id": "form_consult_type",
+        "label": "Consult type label",
+        "default": "Where do you want the plants?"
+      },
+      {
+        "type": "text",
+        "id": "form_consult_type_msg",
+        "label": "Consult type hidden message"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type_one",
+        "label": "Consult type 1",
+        "default": "Home"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type_two",
+        "label": "Consult type 2",
+        "default": "Business"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_type_three",
+        "label": "Consult type 3",
+        "default": "Event"
+      },
+      {
+        "type": "text",
+        "id": "form_budget_range",
+        "label": "Budget range label",
+        "default": "What do you want to spend?"
+      },
+      {
+        "type": "text",
+        "id": "form_budget_range_msg",
+        "label": "Budget range hidden message"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_budget_one",
+        "label": "Budget range 1",
+        "default": "< $500"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_budget_two",
+        "label": "Budget range 2",
+        "default": "$500 - 1500"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_budget_three",
+        "label": "Budget range 3",
+        "default": "$1500 - 3000"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_budget_four",
+        "label": "Budget range 4",
+        "default": "$3000 - 5000"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_budget_five",
+        "label": "Budget range 5",
+        "default": "$5000 +"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_message",
+        "label": "Message label",
+        "default": "Tell us your thoughts."
+      },
+      {
+        "type": "text",
+        "id": "form_contact_message_msg",
+        "label": "Message hidden message",
+        "default": "Don't be shy"
+      },
+      {
+        "type": "text",
+        "id": "form_contact_submit",
+        "label": "Submit button text",
+        "default": "Send your message to a human at Forage"
+      }
+    ]
+  }
+{% endschema %}

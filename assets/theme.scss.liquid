@@ -153,7 +153,6 @@
 
 @mixin accentFontStack {
   font-family: $accentFontStack;
-  font-weight: $accentFontWeight;
   font-style: normal;
   {% if settings.type_accent_spacing %}
     letter-spacing: 0.15em;
@@ -1070,7 +1069,7 @@ html:not(.lt-ie9) {
       td:before {
         content: attr(data-label);
         float: left;
-        @include accentFontStack;
+        @include sweetRegular;
         font-size: 12px;
         padding-right: 10px;
       }
@@ -1147,7 +1146,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 /*================ Tables ================*/
 th,
 .table__title {
-  @include accentFontStack;
+  @include sweetRegular;
   font-weight: normal;
   font-size: em(13px);
   letter-spacing: 0.15em;
@@ -1156,7 +1155,7 @@ th,
 /*================ Rich Text Editor Styles ================*/
 .rte {
   h1 {
-    @include accentFontStack;
+    @include sweetRegular;
     font-size: em(22px);
     color: $colorSecondary;
   }
@@ -1253,7 +1252,7 @@ blockquote {
     position: absolute;
     font-size: 16px;
     background-color: rgba(0,0,0,0.3);
-    @include accentFontStack;
+    @include sweetRegular;
     letter-spacing: 0.15em;
     padding: 0 0 20px;
     color: white;
@@ -1366,7 +1365,7 @@ blockquote {
 }
 
 .comment-date {
-  @include accentFontStack;
+  @include sweetRegular;
   font-size: em(12px);
 }
 
@@ -1384,7 +1383,7 @@ blockquote {
 .ajaxcart__price,
 .cart__price,
 .cart__subtotal {
-  @include accentFontStack;
+  @include sweetRegular;
 }
 
 .ajaxcart__price {
@@ -1403,11 +1402,11 @@ blockquote {
 }
 
 .ajaxcart__subtotal {
-  @include accentFontStack;
+  @include sweetRegular;
 }
 
 .ajaxcart__qty-num[type="text"] {
-  @include accentFontStack;
+  @include sweetRegular;
   font-style: normal;
   font-size: em(13px);
 }
@@ -1782,7 +1781,7 @@ a {
 /*================ Buttons and Input Groups ================*/
 .btn,
 .btn--secondary {
-  @include accentFontStack;
+  @include sweetRegular;
   color: $colorBody;
   padding: 15px 20px;
   font-size: em(11px);
@@ -2179,6 +2178,10 @@ $shareCountBg: $colorBody;
   margin: 0 0 30px;
 }
 
+.form-section {
+  margin: 100px 0 0;
+}
+
 #shopify-section-contact .section-header {
   margin-top: 80px;
 }
@@ -2573,7 +2576,7 @@ $shareCountBg: $colorBody;
   }
 
   .hero__subtitle {
-    @include accentFontStack;
+    @include sweetRegular;
     margin-bottom: 15px;
   }
 
@@ -3079,7 +3082,7 @@ footer {
 .site-header__logo a,
 .header-logo a {
   @include transition(color 0.2s);
-  @include accentFontStack;
+  @include sweetRegular;
 
   .is-light & {
     color: #fff;
@@ -3218,7 +3221,7 @@ footer {
 .tags {
   a {
     padding: 4px ($gutter / 2);
-    @include accentFontStack;
+    @include sweetRegular;
     font-size: em(13px);
     letter-spacing: 0.15em;
   }
@@ -3278,7 +3281,7 @@ footer {
   }
 
   label {
-    @include accentFontStack;
+    @include sweetRegular;
     position: relative;
     display: inline-block;
     line-height: 1;
@@ -3762,7 +3765,7 @@ button.mfp-arrow {
 }
 
 .grid-product__vendor {
-  @include accentFontStack;
+  @include sweetRegular;
   letter-spacing: 0.2em;
   font-size: em(11px);
   margin: 1px 0;
@@ -4050,8 +4053,11 @@ button.mfp-arrow {
 }
 
 /*================ Comments ================*/
-.comment.last {
-  margin-bottom: -($gutter / 2);
+.no-bullets {
+  margin-bottom: 60px;
+}
+.comment {
+  margin-bottom: 45px;
 }
 
 /*============= Templates | Password page =============*/
@@ -4234,8 +4240,10 @@ button.mfp-arrow {
   }
 }
 
-.password-page__signup-form {
-  #email {
+.password-page__signup-form,
+.password-page__login-form {
+  #email,
+  #password {
     border-right: 0;
   }
   .password-page__signup-form__submit {
@@ -4284,9 +4292,16 @@ button.mfp-arrow {
 }
 
 .password-login {
-  @include accentFontStack;
+  @include sweetRegular;
   font-size: em( 0.8 * $baseFontSize );
   line-height: 0.8 * $baseFontSize;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 45px;
+  a {
+    color: $colorBtnPrimary;
+  }
 }
 
 .lock-icon-svg {

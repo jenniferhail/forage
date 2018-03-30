@@ -6,36 +6,56 @@
 {% endif %}
 
 <div class="grid">
-  <article class="grid__item large--five-sixths push--large--one-twelfth article" itemscope itemtype="http://schema.org/Article">
+  <article class="grid__item large--three-sixths push--large--three-twelfths article" itemscope itemtype="http://schema.org/Article">
+    <div class="grid"></div>
+      <div class="grid__item">
+        <header>
+          {% assign featured_image_src = '' %}
 
-    <header class="section-header text-center">
-      <h1>{{ article.title }}</h1>
-      <hr class="hr--small">
-      <p>
-        <span class="date"><time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time></span>
-      </p>
-    </header>
+          {% if article.image %}
+            {% assign featured_image_src = article | img_url: '1024x1024' %}
+          {% elsif article_content contains '<img' %}
+            {% assign featured_image_src = article_content | split: 'src="' %}
+            {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
+          {% endif %}
 
-    <div class="grid">
-      <div class="grid__item large--four-fifths push--large--one-tenth">
+          {% unless featured_image_src == blank %}
+            <div class="article__featured-image">
+              {{ featured_image_src | img_tag: article.title }}
+            </div>
+          {% endunless %}
+        </header>
+      </div>
 
-        <div class="rte rte--indented-images" itemprop="articleBody">
-          {{ article.content }}
+      <div class="grid__item large--two-thirds push--large--one-sixth">
+
+        <div class="article__content text-center">
+
+          <h1 class="article__title">{{ article.title }}</h1>
+
+          <div class="rte rte--indented-images" itemprop="articleBody">
+            {{ article.content }}
+          </div>
+
+          <ul class="tags tags--article inline-list">
+            {% include 'tags-article' %}
+          </ul>
+
+          {% if section.settings.social_sharing_blog %}
+            {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+          {% endif %}
+
         </div>
 
-        <ul class="tags tags--article inline-list">
-          {% include 'tags-article' %}
-        </ul>
+      </div>
 
-        {% if section.settings.social_sharing_blog %}
-          {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
-        {% endif %}
-
+      <div class="grid__item">
         {% if blog.comments_enabled? %}
 
           {% if number_of_comments > 0 %}
-            <hr class="hr--large">
-            <h2 class="h3 text-center">{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h2>
+            <hr>
+            <hr class="hr--small hr--clear">
+            <h1 class="text-center">{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h1>
             <hr class="hr--small hr--clear">
           {% endif %}
 
@@ -74,9 +94,9 @@
                       {% include 'comment' %}
                     </li>
 
-                    {% unless forloop.last %}
+{% comment %}                    {% unless forloop.last %}
                       <li><hr class="hr--clear"></li>
-                    {% endunless %}
+                    {% endunless %}{% endcomment %}
                   {% endfor %}
                 </ul>
 
@@ -86,9 +106,9 @@
 
               {% endif %}
 
-              <hr class="hr--large">
-
-              <h2 class="h3 text-center">{{ 'blogs.comments.title' | t }}</h2>
+              <hr>
+              <hr class="hr--small hr--clear">
+              <h1 class="text-center">{{ 'blogs.comments.title' | t }}</h1>
               <hr class="hr--small hr--clear">
 
               <div class="form-vertical">
@@ -97,11 +117,11 @@
                   {{ form.errors | default_errors }}
 
                   <div class="grid grid--small">
-                    <div class="grid__item large--one-half">
+                    <div class="grid__item">
                       <label for="CommentAuthor" class="hidden-label">{{ 'blogs.comments.name' | t }}</label>
                       <input class="input-full{% if form.errors contains 'author' %} error{% endif %}" type="text" name="comment[author]" placeholder="{{ 'blogs.comments.name' | t }}" id="CommentAuthor" value="{{ form.author }}" autocapitalize="words">
                     </div>
-                    <div class="grid__item large--one-half">
+                    <div class="grid__item">
                       <label for="CommentEmail" class="hidden-label">{{ 'blogs.comments.email' | t }}</label>
                       <input class="input-full{% if form.errors contains 'email' %} error{% endif %}" type="email" name="comment[email]" placeholder="{{ 'blogs.comments.email' | t }}" id="CommentEmail" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
                     </div>
@@ -112,7 +132,7 @@
 
                   <div class="text-center">
                     {% if blog.moderated? %}
-                      <p>{{ 'blogs.comments.moderated' | t }}</p>
+                      <p><i>{{ 'blogs.comments.moderated' | t }}</i></p>
                     {% endif %}
 
                     <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
@@ -124,9 +144,7 @@
             </div>
           {% endpaginate %}
         {% endif %}
-
       </div>
-    </div>
 
   </article>
 </div>
