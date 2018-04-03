@@ -3088,6 +3088,17 @@ footer {
       content: none;
     }
   }
+  p {
+    line-height: 2.2;
+  }
+  a.footer-link {
+    color: $colorSecondary;
+    font-style: italic;
+    @include transition('color 0.2s, opacity 0.1s');
+    &:hover {
+      color: $colorBtnSecondaryHover;
+    }
+  }
 }
 
 /*================ Text Shop Name ================*/
@@ -4280,6 +4291,15 @@ button.mfp-arrow {
   }
 }
 
+#newsletter {
+  #email {
+    border-right: 0;
+  }
+  .newsletter__signup-form__submit {
+    border: 1px solid $colorTextBody;
+  }
+}
+
 .password-page__signup-form__heading {
   margin-bottom: 0.8em;
   font-family: sweet_sansmedium;
@@ -4598,3 +4618,9 @@ a.quickview-link:hover {
 .full-description {
   font-style: italic;
 }
+
+#newsletter {
+  max-width: 600px;
+  width: 60%;
+}
+

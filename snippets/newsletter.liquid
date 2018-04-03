@@ -1,0 +1,51 @@
+<div id="newsletter" style="display: none;">
+
+  {% if settings.newsletter_title != blank %}
+    <h1 itemprop="title" class="product-single__title">{{ settings.newsletter_title }}</h1>
+  {% endif %}
+
+  {% if settings.newsletter_text != blank %}{{ settings.newsletter_text }}{% endif %}
+
+  <form action="https://bypine.us10.list-manage.com/subscribe/post-json?u=90363b999232548e9532004b0&amp;id=874c472f49&c=?" method="get" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
+    <div id="subscribe-result">
+    </div>
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+        <input type="text" name="b_e44c1f194bec93e238615469e_f6f826e769" tabindex="-1" value="">
+    </div>
+    <div class="input-group">
+      <input type="email" value="" name="EMAIL" placeholder="Email address" class="email input-group-field" id="email" required>
+      <span class="input-group-btn">
+        <input type="submit" value="subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn newsletter__signup-form__submit">
+      </span>
+    </div>
+  </form>
+
+</div>
+
+<!--End mc_embed_signup-->
+
+{% comment %}  {% form 'customer' %}
+    {{ form.errors | default_errors }}
+    {% if form.posted_successfully? %}
+      <div class="newsletter--form">
+        <div class="note form-success">{{ 'general.newsletter_form.newsletter_confirmation' | t }}</div>
+      </div>
+    {% else %}
+      <label for="Email" class="newsletter__label hidden-label">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter--form">
+        <div class="input-group">
+          <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" name="contact[email]" id="Email" class="input-group-field newsletter__input" autocorrect="off" autocapitalize="off">
+          <span class="input-group-btn">
+            <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe">
+              <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
+              <span class="newsletter__submit-text--small">
+                <span class="icon icon-arrow-right" aria-hidden="true"></span>
+              </span>
+            </button>
+          </span>
+        </div>
+      </div>
+    {% endif %}
+  {% endform %}{% endcomment %}
+</div>

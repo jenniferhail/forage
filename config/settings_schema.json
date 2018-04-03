@@ -1236,5 +1236,24 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+  {
+    "name": "Newsletter",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Pop Up"
+      },
+      {
+        "type": "text",
+        "id": "newsletter_title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "newsletter_text",
+        "label": "Text"
+      }
+    ]
   }
 ]

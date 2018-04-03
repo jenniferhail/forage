@@ -96,6 +96,10 @@
         {% assign num_footer_columns = num_footer_columns | plus: 1 %}
       {% endif %}
 
+      {% if section.settings.footer_newsletter_text != blank %}
+        {% assign num_footer_columns = num_footer_columns | plus: 1 %}
+      {% endif %}
+
       {% case num_footer_columns %}
         {% when 0 %}
         {% when 1 %}
@@ -129,15 +133,15 @@
           <ul class="no-bullets site-footer__linklist">
             {% for link in linklists[section.settings.footer_link_list].links %}
 
-      {% comment %}
-        Create a second column
-      {% endcomment %}
-      {% if extra_footer_linklist_column and forloop.index == footer_linklist_split %}
-          </ul>
-        </div>
-        <div class="grid__item {{ footer_column_width }}">
-          <ul class="no-bullets site-footer__linklist">
-      {% endif %}
+              {% comment %}
+                Create a second column
+              {% endcomment %}
+              {% if extra_footer_linklist_column and forloop.index == footer_linklist_split %}
+                  </ul>
+                </div>
+                <div class="grid__item {{ footer_column_width }}">
+                  <ul class="no-bullets site-footer__linklist">
+              {% endif %}
 
               <li><a href="{{ link.url }}">{{ link.title }}</a></li>
 
@@ -233,6 +237,15 @@
         </div>
       {% endif %}
 
+      {% if section.settings.footer_newsletter_text != blank %}
+        <div class="grid__item {{ footer_column_width }}">
+          <span class="footer-heading">{{ section.settings.footer_newsletter_title }}</span>
+          <p>{{ section.settings.footer_newsletter_text }}</br>
+          <a class="footer-link" data-fancybox data-src="#newsletter" href="javascript:;">{% if section.settings.footer_newsletter_btn != blank %}{{ section.settings.footer_newsletter_btn }}{% else %}Yes please!{% endif %}</a></p>
+          {% include 'newsletter' %}
+        </div>
+      {% endif %}
+
       <hr class="hr--clear">
 
       <div class="endnotes text-center">
@@ -308,6 +321,24 @@
         "id": "footer_socialmedia_title",
         "label": "Social Media Title",
         "default": "Connect"
+      },
+      {
+        "type": "text",
+        "id": "footer_newsletter_title",
+        "label": "Newsletter Title",
+        "default": "Newsletter"
+      },
+      {
+        "type": "text",
+        "id": "footer_newsletter_text",
+        "label": "Newsletter message",
+        "default": "Sign up for 10% off your first purchase"
+      },
+      {
+        "type": "text",
+        "id": "footer_newsletter_btn",
+        "label": "Newsletter button",
+        "default": "Yes please!"
       }
     ]
   }
