@@ -1004,7 +1004,13 @@ hr {
 table {
   position: relative;
   border: 0 none;
-  background-color: $colorNewsletter;
+  background-color: #f9f9f9;
+  tr:nth-child(2) td {
+    padding-top: 15px;
+  }
+  th {
+    padding: 15px 15px 12px;
+  }
 }
 
 td,
@@ -1025,14 +1031,14 @@ tr:first-child td {
     display: block;
     position: absolute;
     bottom: 0;
-    left: -15px;
-    right: 15px;
+    left: 0;
+    right: 0;
     border-bottom: 1px solid $colorBorder;
   }
 
   &:first-child:after {
-    left: 15px;
-    right: -15px;
+    left: 0;
+    right: 0;
   }
 }
 
@@ -1129,6 +1135,7 @@ h4 {
 
 h5,
 h6 {
+  @include sweetMedium;
   font-size: em(floor($headerBaseFontSize * 0.5)); //14px
 }
 
@@ -1161,36 +1168,54 @@ th,
   }
 
   h2 {
-    font-size: em(17px);
+    font-size: em(18px);
     color: $colorSecondary;
   }
 
   h3 {
-    font-size: em(15px);
+    font-size: em(16px);
     color: $colorSecondary;
   }
   h4 {
-    font-size: em(12px);
+    font-size: em(14px);
     color: $colorSecondary;
   }
   h5 {
-    font-size: em(10px);
+    font-size: em(12px);
     color: $colorSecondary;
   }
   h6 {
-    font-size: em(8px);
+    font-size: em(10px);
     color: $colorSecondary;  
   }
 }
 
 blockquote {
   @include bodyFontItalic;
-  font-size: em(23px);
+  // font-size: em(23px);
+  padding: 30px;
   line-height: 1.385;
   text-align: center;
-
-  @include at-query($min, $postSmall) {
-    font-size: em(26px);
+  width: 60%;
+  margin: 0 auto;
+  // @include at-query($min, $postSmall) {
+  //   font-size: em(26px);
+  // }
+  &:before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: $colorBtnPrimary;
+    margin: 0 auto 30px;
+    width: 50%;
+  }
+  &:after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: $colorBtnPrimary;
+    margin: 30px auto 0;
+    width: 50%;
   }
 }
 
@@ -2129,30 +2154,32 @@ $shareCountBg: $colorBody;
 }
 
 // Force heights for consistency
-.grid-search__page-link,
-.grid-search__product-link {
-  @include at-query($min, $large) {
-    height: 280px;
-  }
-}
+// .grid-search__page-link,
+// .grid-search__product-link {
+//   @include at-query($min, $large) {
+//     height: 280px;
+//   }
+// }
 
 .grid-search__page-link {
   display: block;
-  background-color: $colorProductBackground;
-  padding: 20px;
   color: $colorTextBody;
   overflow: hidden;
-
-  &:hover,
-  &:focus {
-    background-color: adaptive-color($colorProductBackground, 3%);
+  img {
+    display: block;
   }
+
+  // &:hover,
+  // &:focus {
+  //   background-color: adaptive-color($colorProductBackground, 3%);
+  // }
 }
 
 .grid-search__page-content {
   display: block;
   height: 100%;
   overflow: hidden;
+  margin-top: 30px;
 }
 
 .grid-search__image {
@@ -4081,7 +4108,7 @@ button.mfp-arrow {
 
 .article__content {
   position: relative;
-  top: -3.5em;
+  top: -3.25em;
 }
 
 /*================ RSS ================*/
@@ -4478,7 +4505,7 @@ button.mfp-arrow {
   }
 }
 
-#SearchModal {
+.search-bar {
   input {
     border-right: #b19565;
   }

@@ -10,7 +10,7 @@
   <div class="grid__item large--five-sixths push--large--one-twelfth">
     {% if cart.item_count > 0 %}
       <header class="section-header text-center">
-        <h2>{{ 'cart.general.title' | t }}</h2>
+        <span class="h2">{{ 'cart.general.title' | t }}</span>
         <h1>{{ 'cart.general.full' | t }}</h1>
       </header>
 
@@ -182,7 +182,7 @@
       {% endcomment %}
 
       <header class="section-header text-center">
-        <h2>{{ 'cart.general.title' | t }}</h2>
+        <span class="h2">{{ 'cart.general.title' | t }}</span>
         <h1>{{ 'cart.general.empty' | t }}</h1>
         <a href="/collections/all" class="btn btn--page">{{ 'cart.general.continue_browsing_html' | t }}</a>
       </header>

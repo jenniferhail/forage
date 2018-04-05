@@ -246,13 +246,15 @@
         </div>
       {% endif %}
 
-      <hr class="hr--clear">
-
       <div class="endnotes text-center">
         <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: '/' }}. All rights reserved.<br>
-          <span><a href="">Terms of Use</a></span>
-          <span><a href="">Privacy Policy</a></span>
+          {% if section.settings.footer_link_one_url %}
+            <span><a href="{{ section.settings.footer_link_one_url }}">{{ section.settings.footer_link_one }}</a></span>
+          {% endif %}
           <span>Site by <a href="http://www.bypine.co">Studio Pine</a></span>
+          {% if section.settings.footer_link_two_url %}
+            <span><a href="{{ section.settings.footer_link_two_url }}">{{ section.settings.footer_link_two }}</a></span>
+          {% endif %}
         </p>
 
 {% comment %}        {% unless shop.enabled_payment_types == empty %}
@@ -282,6 +284,10 @@
     "name": "Footer",
     "settings": [
       {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
         "type": "image_picker",
         "id": "footer_logo",
         "label": "Logo image"
@@ -291,6 +297,10 @@
         "id": "footer_logo_max_width",
         "label": "Custom logo width (in pixels)",
         "default": "270"
+      },
+      {
+        "type": "header",
+        "content": "Columns"
       },
       {
         "type": "text",
@@ -339,6 +349,32 @@
         "id": "footer_newsletter_btn",
         "label": "Newsletter button",
         "default": "Yes please!"
+      },
+      {
+        "type": "header",
+        "content": "Copyright & Links"
+      },
+      {
+        "type": "text",
+        "id": "footer_link_one",
+        "label": "Link one title",
+        "default": "Terms of Use"
+      },
+      {
+        "type": "url",
+        "id": "footer_link_one_url",
+        "label": "Link one"
+      },
+      {
+        "type": "text",
+        "id": "footer_link_two",
+        "label": "Link two title",
+        "default": "Privacy Policy"
+      },
+      {
+        "type": "url",
+        "id": "footer_link_two_url",
+        "label": "Link two"
       }
     ]
   }

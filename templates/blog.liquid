@@ -6,11 +6,11 @@
   <div class="grid__item large--five-sixths push--large--one-twelfth">
 
     <header class="section-header text-center">
-      <h2>{{ blog.title }}</h2>
+      <span class="h2">{{ blog.title }}</span>
       {% if page_description %}
         <h1>{{ page_description }}</h1>
       {% endif %}
-{% comment %}      <hr class="hr--small">{% endcomment %}
+      {% comment %}<hr class="hr--small">{% endcomment %}
       {% if current_tags %}
         {{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
       {% endif %}

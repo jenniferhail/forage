@@ -22,6 +22,7 @@
   <div class="grid">
     <div class="grid__item">
       <header class="section-header text-center">
+        <span class="h2">{{ 'general.search.title' | t }}</span>
         {% if search.performed %}
           {% if search.results_count == 0 %}
             <h1 class="text-center">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
@@ -29,9 +30,9 @@
             <h1 class="text-center">{{ 'general.search.results_for_html' | t: terms: search.terms }}</h1>
           {% endif %}
         {% else %}
-          <h1 class="text-center">{{ 'general.search.title' | t }}</h1>
+          <h1 class="text-center">{{ 'general.search.subtitle' | t }}</h1>
         {% endif %}
-        <hr class="hr--small">
+        {% comment %}<hr class="hr--small">{% endcomment %}
       </header>
 
       {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--page' %}
@@ -47,9 +48,18 @@
               {% assign product = item %}
               {% include 'product-grid-item' %}
             {% else %}
+
               <div class="grid__item grid-search large--one-third medium--one-half">
                 <div class="grid-search__page">
                   <a href="{{ item.url }}" class="grid-search__page-link">
+                  {% if item.image %}
+                    {% assign featured_image_src = item | img_url: '800x800' %}
+                    {{ featured_image_src | img_tag: item.title }}
+                  {% elsif item_content contains '<img' %}
+                    {% assign featured_image_src = item_content | split: 'src="' %}
+                    {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
+                    {{ featured_image_src | img_tag: item.title }}
+                  {% endif %}
                     <span class="grid-search__page-content">
                       <span class="h4 text-center">{{ item.title }}</span>
                       {{ item.content | strip_html | truncatewords: 60 }}
