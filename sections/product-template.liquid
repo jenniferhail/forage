@@ -6,35 +6,50 @@
     <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'large' }}">
 
     {% assign current_variant = product.selected_or_first_available_variant %}
+    {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
 
     <div class="grid product-single">
       <div class="grid__item large--six-tenths medium--seven-twelfths text-center">
         <div class="product-single__photos grid">      
 
-          <div class="grid__item one-sixth stick-this">
-            
-            {% if product.images.size > 1 %}
+          {% if product.images.size > 1 %}
+            <div class="grid__item one-sixth stick-this">
               <div class="thumbnails-wrapper">
                 <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
-                  {% for image in product.images %}
-                    <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
-                      <a href="#{{ image.id }}"
-                         class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
-                         data-thumbnail-id="{{ image.id }}"
-                         {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
-                           <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
-                      </a>
-                    </li>
-                  {% endfor %}
+                  {% if product.type == "Event" %}
+                    {% for image in product.images %}
+                      {% unless image contains featured_image %}
+                        <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
+                          <a href="#{{ image.id }}"
+                             class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+                             data-thumbnail-id="{{ image.id }}"
+                             {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+                               <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
+                          </a>
+                        </li>
+                      {% endunless %}
+                    {% endfor %}
+                  {% else %}
+                    {% for image in product.images %}
+                      <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
+                        <a href="#{{ image.id }}"
+                           class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+                           data-thumbnail-id="{{ image.id }}"
+                           {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+                             <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
+                        </a>
+                      </li>
+                    {% endfor %}
+                  {% endif %}
                 </ul>
               </div>
-            {% endif %}
+            </div>
+        <div class="grid__item five-sixths stick-this">
+          {% else %}
+        <div class="grid__item one-whole stick-this">
+          {% endif %} 
 
-          </div> 
-
-          <div class="grid__item five-sixths stick-this"> 
-
-            {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+          {% comment %}<div class="grid__item five-sixths stick-this"> {% endcomment %}
 
             {% comment %}
               Display current variant image, or default first
@@ -43,7 +58,7 @@
               <div class="product-single__photo-wrapper">
                 <img class="product-single__photo"
                   id="{{ featured_image.id }}"
-                  src="{{ featured_image | img_url: '1000x1000' }}"
+                  src="{{ featured_image | img_url: '1024x1024' }}"
                   {% if section.settings.zoom_enable %}data-mfp-src="{{ featured_image | img_url: '1024x1024' }}"{% endif %}
                   alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
               </div>
@@ -57,7 +72,7 @@
                 <div class="product-single__photo-wrapper">
                   <img class="product-single__photo" 
                     id="{{ image.id }}"
-                    src="{{ image.src | img_url: '1000x1000' }}"
+                    src="{{ image.src | img_url: '1024x1024' }}"
                     {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %}
                     alt="{{ image.alt | escape }}"
                     data-image-id="{{ image.id }}">

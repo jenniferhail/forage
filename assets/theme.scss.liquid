@@ -4539,19 +4539,17 @@ button.mfp-arrow {
   }
 }
 
-#ProductPrice:after {
-  content: '';
-  display: block;
-  height: 1px;
-  background-color: $colorBtnPrimary;
-  position: absolute;
-  margin-top: 0.75em;
-  z-index: 0;
-  width: 100%;
-  left: 0;
-  // width: 320%;
-  // left: -182%;
-}
+// #ProductPrice:after {
+//   content: '';
+//   display: block;
+//   height: 1px;
+//   background-color: $colorBtnPrimary;
+//   position: absolute;
+//   margin-top: 0.75em;
+//   z-index: 0;
+//   width: 100%;
+//   left: 0;
+// }
 
 .is_stuck #ProductPrice:after {
   width: 320%;
@@ -4568,6 +4566,7 @@ button.mfp-arrow {
 }
 
 .product-single__description {
+  margin-top: 60px;
   h1, h2, h3, h4, h5 {
     @include sweetMedium;
     font-size: em(15px);
