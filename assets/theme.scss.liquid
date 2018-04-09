@@ -3171,12 +3171,12 @@ footer {
 /*================ Nav Links ================*/
 .site-nav {
   white-space: nowrap;
-  opacity: 0;
+{% comment %}  opacity: 0;
 
   .no-js &,
   &.site-nav--init {
     opacity: 1;
-  }
+  }{% endcomment %}
 }
 
 .site-nav__item {
@@ -4594,7 +4594,8 @@ button.mfp-arrow {
   }
   .grid-product__date,
   .grid-product__sold-out,
-  .grid-product__on-sale {
+  .grid-product__on-sale,
+  .proPrice {
     @include sweetRegular;
     color: $colorTextSub;
   }
@@ -4611,7 +4612,7 @@ button.mfp-arrow {
   .product-form__item {
     margin-top: 30px;
   }
-  .product-single__description {
+  .proShortDescription {
     margin: 30px 0;
   }
 }

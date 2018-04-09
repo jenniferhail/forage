@@ -1,0 +1,53 @@
+<div id="loading" style="display:none;"></div>
+{% if settings.loading_enable %}
+    <div id="loadingSite">
+        <div class="loader"></div>
+    </div>
+{% endif %}
+{% comment %}Quick view{% endcomment %}
+{% assign count_images = product.images | size %}
+{% if product.type == "Event" %}
+    {% assign image_class = proEventQuickview %}
+{% else %}
+    {% assign image_class = proImageQuickview %}
+{% endif %}
+
+<div id="velaQuickView" class="quickview" style="display:none;">
+    <div class="quickviewOverlay"></div>
+    <div class="jsQuickview"></div>
+    <div id="quickviewModal" class="quickviewProduct" style="display:none;">
+        <a title="Close" class="quickviewClose" href="javascript:void(0);"></a>
+        <div class="proBoxPrimary grid grid--uniform">
+            <div class="proBoxImage grid__item medium-up--one-half">
+                <div class="proFeaturedImage">
+                    <a class="proImage proUrl" title="" href="">
+                        <img class="img-responsive proImageQuickview" src="{{ 'loading.gif' | asset_url }}" alt="Quickview"  />
+                    </a>
+                </div>
+            </div>
+            <div class="proBoxInfo grid__item medium-up--one-half grid-view-item__title">
+                <a class="proUrl" href=""><h1 class="quickviewName">&nbsp;</h1></a>
+                <div class="proPrice clearfix">
+                    <span class="priceProduct pricePrimary"></span>
+                    <span class="priceProduct priceCompare"></span>
+                </div>
+                <div class="proShortDescription rte{% if settings.quickview_shortdesc_enable == false %} hidden{% endif %}"></div>
+                <div class="full-description">
+                    <a class="proUrl" href="">View full description &#10230;</a>
+                </div>
+                <form action="/cart/add" method="post" enctype="multipart/form-data" class="formQuickview form-ajaxtocart">
+                    <div class="product-form__item proVariantsQuickview"><select name='id' style="display:none"></select></div>
+                    <div class="proButton">
+                        <div class="product-form__item proQuantity">
+                            <label for="Quantity" class="qtySelector">{{ 'products.product.quantity' | t }}</label>
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qtySelector">
+                        </div>
+                        <button type="submit" name="add" class="btn btnAddToCart product-form__item">
+                            <span>{{ 'products.product.add_to_cart' | t }}</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+</div>

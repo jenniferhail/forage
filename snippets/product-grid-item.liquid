@@ -17,21 +17,9 @@
 
     <div class="grid-product__image-wrapper">
       <a class="grid-product__image-link" href="{{ product.url | within: collection }}">
-        {% if product.type == "Event" %}
-          {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
-          {% for image in product.images %}
-            {% unless image contains featured_image %}
-              <img src="{{ image.src | img_url: '800x800' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image_event">
-              {% break %}
-            {% endunless %}
-          {% endfor %}
-        {% else %}
-          <img src="{{ product | img_url: '800x800' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image">
-        {% endif %}
+        <img src="{{ product | img_url: '800x800' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image">
       </a>
     </div>
-
-{% comment %}Place the product meta here{% endcomment %}
 
     <div class="grid-product__meta">
 
@@ -96,16 +84,14 @@
       </a>
 
       <div class="product-grid-right">
-        <div class="grid-product__quickview">
-          <a class="quickview-link" data-fancybox data-src="#quickview-{{ product.id }}" href="javascript:;">
-            <span class="icon icon-search"></span>
+        <div class="productQuickView">
+          <a class="btnProduct btnProductQuickview quickview-link" data-fancybox href="#velaQuickView" data-handle="{{ product.handle }}" title="Quickview">
+              <span class="icon icon-search"></span>
           </a>
         </div>
       </div>
 
     </div>
-
-    {% include 'quickview' %}
 
   </div>
 </div>

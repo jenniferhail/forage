@@ -31,7 +31,7 @@
   <div class="grid-product__wrapper">
     <div class="grid-product__image-wrapper">
       <a class="grid-product__image-link" href="{{ product.url | within: collection }}">
-        <img src="{{ product | img_url: '1200x1200' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image">
+        <img src="{{ product.images.last | img_url: '1200x1200' }}" alt="{{ product.featured_image.alt | escape }}" class="grid-product__image">
       </a>
     </div>
 

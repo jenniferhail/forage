@@ -52,6 +52,9 @@
       "close_menu": "Close menu",
       "expand_submenu": "Expand submenu",
       "collapse_submenu": "Collapse submenu"
+    },
+    "quickview": {
+      "title": "Quickview"
     }
   },
   "blogs": {
