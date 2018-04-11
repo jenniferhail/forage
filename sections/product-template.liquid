@@ -10,10 +10,10 @@
 
     <div class="grid product-single">
       <div class="grid__item large--six-tenths medium--seven-twelfths text-center">
-        <div class="product-single__photos grid">      
+        <div class="grid">      
 
           {% if product.images.size > 1 %}
-            <div class="grid__item one-sixth stick-this">
+            <div class="grid__item one-sixth stick-this small--hide">
               <div class="thumbnails-wrapper">
                 <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
 
@@ -48,7 +48,7 @@
                 </ul>
               </div>
             </div>
-        <div class="grid__item five-sixths stick-this">
+        <div class="grid__item one-whole medium-up--five-sixths stick-this">
           {% else %}
         <div class="grid__item one-whole stick-this">
           {% endif %} 
@@ -58,12 +58,24 @@
             {% comment %}
               Display the product images
             {% endcomment %}
-
-            {% if product.type == "Event" %}
-              {% for image in product.images %}
-                {% if forloop.last == true %}
-                  {% break %}
-                {% else %}
+            <div class="product-single__photos">
+              {% if product.type == "Event" %}
+                {% for image in product.images %}
+                  {% if forloop.last == true %}
+                    {% break %}
+                  {% else %}
+                    <div class="product-single__photo-wrapper">
+                      <img class="product-single__photo" 
+                        id="{{ image.id }}"
+                        src="{{ image.src | img_url: '1024x1024' }}"
+                        {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %}
+                        alt="{{ image.alt | escape }}"
+                        data-image-id="{{ image.id }}">
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                {% for image in product.images %}
                   <div class="product-single__photo-wrapper">
                     <img class="product-single__photo" 
                       id="{{ image.id }}"
@@ -72,20 +84,9 @@
                       alt="{{ image.alt | escape }}"
                       data-image-id="{{ image.id }}">
                   </div>
-                {% endif %}
-              {% endfor %}
-            {% else %}
-              {% for image in product.images %}
-                <div class="product-single__photo-wrapper">
-                  <img class="product-single__photo" 
-                    id="{{ image.id }}"
-                    src="{{ image.src | img_url: '1024x1024' }}"
-                    {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %}
-                    alt="{{ image.alt | escape }}"
-                    data-image-id="{{ image.id }}">
-                </div>
-              {% endfor %}
-            {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
 
           </div>
 
