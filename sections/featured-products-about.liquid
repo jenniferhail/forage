@@ -8,7 +8,7 @@
     
     <hr class="hr--large">
 
-    <div class="grid-uniform{% comment %}grid--no-gutters{% endcomment %}">
+    <div class="grid">
 
       {% comment %}
         Loop through products in your Frontpage collection.
@@ -31,7 +31,7 @@
         {% include 'onboarding-featured-products' %}
       {% else %}
 
-        {% assign grid_item_width = 'medium--one-third large--one-fifth' %}
+        {% assign grid_item_width = 'medium--one-half large--one-fifth' %}
         {% for product in collections[section.settings.home_featured_products].products %}
           {% include 'product-grid-item' %}
         {% endfor %}

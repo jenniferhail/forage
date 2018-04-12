@@ -1822,6 +1822,8 @@ theme.Product = (function() {
     this.selectors = {
       productImages: '.product-single__photos',
       productImagePhoto: '.product-single__photo',
+      aboutImages: '.about__photos',
+      aboutImagePhoto: '.about__photo',
       productImage: '#ProductPhotoImg',
       addToCart: '#AddToCart',
       productPrice: '#ProductPrice',
@@ -1989,9 +1991,14 @@ theme.Product = (function() {
         arrows: false,
         dots: true,
         adaptiveHeight: true,
-        centerMode: false
+        centerMode: false,
+        slidesToShow: 1,
+        centerPadding: '15px',
+        variableWidth: false,
+        infinite: true
       });
-    },
+
+	},
 
     destroyImageCarousel: function() {
       if (!$(this.selectors.productImages).length) {
@@ -2105,6 +2112,120 @@ theme.Product = (function() {
   });
 
   return Product;
+})();
+
+window.theme = window.theme || {};
+
+theme.About = (function() {
+  function About(container) {
+    var $window = $(window);
+
+    this.settings = {
+      aboutPageLoad: false,
+      preloadImage: false,
+      enableHistoryState: true,
+      namespace: '.aboutSection'
+    };
+
+    this.selectors = {
+      aboutImages: '.about__photos',
+      aboutImagePhoto: '.about__photo'
+    };
+
+    var $container = this.$container = $(container);
+    var sectionId = $container.attr('data-section-id');
+
+    // if (!$('#ProductJson-' + sectionId).html()) {
+    //   return;
+    // }
+    // this.productSingleObject = JSON.parse(document.getElementById('ProductJson-' + sectionId).innerHTML);
+    // this.zoomType = $container.data('image-zoom-type');
+
+    this.initBreakpoints();
+    this.stringOverrides();
+    // this.initProductVariant();
+    // this.initStickyProductMeta();
+
+    // $window
+    //   .on('load' + this.settings.namespace, theme.initStickyProductMeta)
+    //   .on('resize' + this.settings.namespace, theme.debounce(this.initStickyProductMeta, 150).bind(this));
+  }
+
+  About.prototype = _.assignIn({}, About.prototype, {
+    initBreakpoints: function() {
+      var self = this;
+      var $container = self.$container;
+      // self.zoomType = $container.data('image-zoom-type');
+
+      // if (!$('html').hasClass('lt-ie9')) {
+      //   enquire.register(theme.variables.mediaQuerySmall, {
+      //     match: function() {
+      //       self.createImageCarousel();
+      //     },
+      //     unmatch: function() {
+      //       self.destroyImageCarousel();
+      //     }
+      //   });
+      // }
+
+      if (!$('html').hasClass('lt-ie9')) {
+        enquire.register(theme.variables.mediaQueryMediumUp, {
+          match: function() {
+            self.createImageCarousel();
+          }
+          // unmatch: function() {
+          //   self.destroyImageCarousel();
+          // }
+        });
+      }
+    },
+
+    stringOverrides: function() {
+      // Override defaults in theme.strings with potential
+      // template overrides
+
+      theme.aboutStrings = theme.aboutStrings || {};
+      $.extend(theme.strings, theme.aboutStrings);
+    },
+
+    // resizeElements: function() {
+    //   $(this.selectors.productGridImages).imagesLoaded(function() {
+    //     $(this.selectors.productGridImages).css('height', 'auto').equalHeights();
+    //   });
+    // },
+
+    createImageCarousel: function() {
+      if (!$(this.selectors.aboutImages).length || $(this.selectors.aboutImagePhoto).length < 2) {
+        return;
+      }
+
+      $(this.selectors.aboutImages).slick({
+        arrows: true,
+        dots: false,
+        adaptiveHeight: false,
+        centerMode: true,
+        centerPadding: '15px',
+        slidesToShow: 1,
+        initialSlide: 1,
+        variableWidth: true
+      });
+	},
+
+    destroyImageCarousel: function() {
+      if (!$(this.selectors.aboutImages).length) {
+        return;
+      }
+
+      $(this.selectors.aboutImages).unslick();
+    },
+
+    onUnload: function() {
+      this.$container.off(this.settings.namespace);
+      this.destroyImageCarousel();
+    }
+  });
+
+  return About;
 })();
 
 window.theme = window.theme || {};
@@ -2367,6 +2488,7 @@ theme.PasswordHeader = (function() {
 theme.variables = {
   productPageLoad     : false,
   productPageSticky   : true,
+  aboutPageLoad		  : false,
 
   // Breakpoints from src/stylesheets/global/variables.scss.liquid
   mediaQuerySmall     : 'screen and (max-width: 590px)',
@@ -2396,6 +2518,9 @@ theme.initCache = function() {
 
     $productImages          : $('.product-single__photos'),
     $productImagePhoto      : $('.product-single__photo'),
+
+    $aboutImages          : $('.about__photos'),
+    $aboutImagePhoto      : $('.about__photo'),
 
     $indentedRteImages      : $('.rte--indented-images'),
 
@@ -2606,6 +2731,7 @@ $(document).ready(function() {
 
   sections.register('drawer-menu-section', theme.DrawerMenuSection);
   sections.register('product-template', theme.Product);
+  sections.register('about-template', theme.About);
   sections.register('collection-template', theme.Collection);
   sections.register('header-section', theme.HeaderSection);
   sections.register('featured-content-section', theme.FeaturedContentSection);

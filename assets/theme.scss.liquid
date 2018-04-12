@@ -2249,8 +2249,13 @@ $shareCountBg: $colorBody;
   }
 }
 
-#about .section-header {
-  margin-top: 0;
+#about {
+  .section-header {
+    margin-top: 0;
+  }
+  #shopify-section-featured-products-about {
+    margin-top: 60px;
+  }
 }
 
 /*================ Partials | Sections onboarding ================*/
@@ -2437,7 +2442,8 @@ $shareCountBg: $colorBody;
 
 /*================ About Page Slide ================*/
 
-.bxslider {
+.bxslider,
+.about__photos {
   .slick-slide {
     padding: 0 10px;
     opacity: 0.75;
@@ -2449,9 +2455,14 @@ $shareCountBg: $colorBody;
       max-height: 550px;
     }  
   }
+  .slick-prev,
+  .slick-next {
+    margin-top: -35px;
+  }
 }
 
-.bxslider.slick-initialized.slick-slider {
+.bxslider.slick-initialized.slick-slider,
+.about__photos.slick-initialized.slick-slider {
   margin-bottom: 100px;
 }
 

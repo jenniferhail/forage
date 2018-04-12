@@ -129,8 +129,8 @@ vela.cacheSelectors = function () {
 	    $recoverPasswordForm     : $('#RecoverPasswordForm'),
 	    $customerLoginForm       : $('#CustomerLoginForm'),
 	    $passwordResetSuccess    : $('#ResetSuccess'),
-		$velaProductImage    	 : $('#ProductPhotoImg'),
-      	$velaNewletterModal    	 : $('#velaNewsletterModal')
+    	$velaProductImage    	   : $('#ProductPhotoImg'),
+    	$velaNewletterModal    	 : $('#velaNewsletterModal')
   	};
 };
 vela.init = function () {
@@ -776,21 +776,21 @@ vela.quickview = function(){
                     }
                 }
             {% endif %}
-            if (variant && variant.featured_image) {
-                var originalImage = $(".proImageQuickview");
-                var newImage = variant.featured_image;
-                var element = originalImage[0];
-                Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
-                    $('.proThumbnails img').each(function() {
-                        var parentThumbImg = $(this).parent();
-                        var productImage = $(this).parent().data("image");
-                        if (newImageSizedSrc.includes(productImage)) {
-                            $(this).parent().trigger('click');
-                            return false;
-                        }
-                    });
-                });
-            }
+            // if (variant && variant.featured_image) {
+            //     var originalImage = $(".proImageQuickview");
+            //     var newImage = variant.featured_image;
+            //     var element = originalImage[0];
+            //     Shopify.Image.switchImage(newImage, element, function (newImageSizedSrc, newImage, element) {
+            //         $('.proThumbnails img').each(function() {
+            //             var parentThumbImg = $(this).parent();
+            //             var productImage = $(this).parent().data("image");
+            //             if (newImageSizedSrc.includes(productImage)) {
+            //                 $(this).parent().trigger('click');
+            //                 return false;
+            //             }
+            //         });
+            //     });
+            // }
         } else {
             addToCart.addClass('disabled').attr('disabled', 'disabled');
             $(addToCart).find("span").text("{{ 'products.product.sold_out' | t }}");
@@ -2070,9 +2070,9 @@ $(document).ready(function() {
  //    sections.register('velaSlideshowSection', velatheme.SlideshowSection);
 });
 $(window).load(function() {
-    $(vela.productImage);
+    // $(vela.productImage);
   	$(vela.loadingSite);
-  	$( window ).resize(function() {
-      	vela.productImage(); 
-    });
+  	// $( window ).resize(function() {
+   //    	vela.productImage(); 
+   //  });
 });

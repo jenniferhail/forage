@@ -1,50 +1,35 @@
 <!-- /templates/page.about.liquid -->
-<div class="grid">
-  
-  <div class="grid__item">
+<div itemscope itemtype="http://schema.org/Product" id="AboutSection" data-section-id="{{ section.id }}" data-section-type="about-template">
 
-    {% section 'header-page' %}
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'large' }}">
 
-    <div class="grid">
+  <div class="grid">
+    
+    <div class="grid__item">
 
-      <div class="grid__item">
-        <hr class="hr--large">
-        {% section 'slider-about' %}
-      </div>
+      {% section 'header-page' %}
 
-      <div class="grid__item large--three-fifths push--large--two-tenths">
-        <div class="rte rte--nomargin rte--indented-images">
-          {{ page.content }}
+      <div class="grid">
+
+        <div class="grid__item">
+          <hr class="hr--large">
+          {% section 'slider-about' %}
         </div>
-      </div>
 
-      <div class="grid__item">
-        {% section 'featured-products-about' %}
+        <div class="grid__item large--three-fifths push--large--two-tenths">
+          <div class="rte rte--nomargin rte--indented-images">
+            {{ page.content }}
+          </div>
+        </div>
+
+        <div class="grid__item">
+          {% section 'featured-products-about' %}
+        </div>
+
       </div>
 
     </div>
-
   </div>
-</div>
 
-<script>
-$(document).ready(function() {
-    // $('.post-slider').each(function(){
-    //   $(this).find('img').wrap('<div class="item"></div>');
-    //   $(this).find('.item').wrapAll('<div class="bxslider" />');
-    // });
-    $('.bxslider').each(function(){
-        $(this).slick({
-            centerMode: true,
-            centerPadding: '15px',
-            slidesToShow: 1,
-            infinite: true,
-            arrows: true,
-            initialSlide: 1,
-            variableWidth: true,
-            captions: true
-        });
-    });
-    
-});
-</script>
+</div>
