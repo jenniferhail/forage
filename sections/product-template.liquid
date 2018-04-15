@@ -9,73 +9,55 @@
     {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
 
     <div class="grid product-single">
-      <div class="grid__item large--six-tenths medium--seven-twelfths text-center">
-        <div class="grid">      
 
-          {% if product.images.size > 1 %}
-            <div class="grid__item one-sixth stick-this small--hide">
-              <div class="thumbnails-wrapper">
-                <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
+      {% if product.images.size > 1 %}
+        <div class="grid__item small--hide one-twelfth stick-this">
+          <div class="thumbnails-wrapper">
+            <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
 
-                  {% if product.type == "Event" %}
-                    {% for image in product.images %}
-                      {% if forloop.last == true %}
-                        {% break %}
-                      {% else %}
-                        <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
-                          <a href="#{{ image.id }}"
-                             class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
-                             data-thumbnail-id="{{ image.id }}"
-                             {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
-                               <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
-                          </a>
-                        </li>
-                      {% endif %}
-                    {% endfor %}
-                  {% else %}
-                    {% for image in product.images %}
-                      <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
-                        <a href="#{{ image.id }}"
-                           class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
-                           data-thumbnail-id="{{ image.id }}"
-                           {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
-                             <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
-                        </a>
-                      </li>
-                    {% endfor %}
-                  {% endif %}
-
-                </ul>
-              </div>
-            </div>
-        <div class="grid__item one-whole medium-up--five-sixths stick-this">
-          {% else %}
-        <div class="grid__item one-whole stick-this">
-          {% endif %} 
-
-          {% comment %}<div class="grid__item five-sixths stick-this"> {% endcomment %}
-
-            {% comment %}
-              Display the product images
-            {% endcomment %}
-            <div class="product-single__photos">
               {% if product.type == "Event" %}
                 {% for image in product.images %}
                   {% if forloop.last == true %}
                     {% break %}
                   {% else %}
-                    <div class="product-single__photo-wrapper">
-                      <img class="product-single__photo" 
-                        id="{{ image.id }}"
-                        src="{{ image.src | img_url: '1024x1024' }}"
-                        {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %}
-                        alt="{{ image.alt | escape }}"
-                        data-image-id="{{ image.id }}">
-                    </div>
+                    <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
+                      <a href="#{{ image.id }}"
+                         class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+                         data-thumbnail-id="{{ image.id }}"
+                         {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+                           <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
+                      </a>
+                    </li>
                   {% endif %}
                 {% endfor %}
               {% else %}
                 {% for image in product.images %}
+                  <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
+                    <a href="#{{ image.id }}"
+                       class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+                       data-thumbnail-id="{{ image.id }}"
+                       {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+                         <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
+                    </a>
+                  </li>
+                {% endfor %}
+              {% endif %}
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid__item one-whole medium-up--six-twelfths stick-this">
+      {% else %}
+        <div class="grid__item one-whole medium-up--seven-twelfths stick-this">
+      {% endif %} 
+
+          <div class="product-single__photos">
+            {% if product.type == "Event" %}
+              {% for image in product.images %}
+                {% if forloop.last == true %}
+                  {% break %}
+                {% else %}
                   <div class="product-single__photo-wrapper">
                     <img class="product-single__photo" 
                       id="{{ image.id }}"
@@ -84,16 +66,25 @@
                       alt="{{ image.alt | escape }}"
                       data-image-id="{{ image.id }}">
                   </div>
-                {% endfor %}
-              {% endif %}
-            </div>
-
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% for image in product.images %}
+                <div class="product-single__photo-wrapper">
+                  <img class="product-single__photo" 
+                    id="{{ image.id }}"
+                    src="{{ image.src | img_url: '1024x1024' }}"
+                    {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %}
+                    alt="{{ image.alt | escape }}"
+                    data-image-id="{{ image.id }}">
+                </div>
+              {% endfor %}
+            {% endif %}
           </div>
 
         </div>
-      </div>
 
-      <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--four-tenths stick-this">
+      <div class="grid__item product-single__meta--wrapper one-whole medium-up--five-twelfths stick-this">
         <div class="product-single__meta">
           {% if section.settings.product_vendor_enable %}
             <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
@@ -121,12 +112,6 @@
             content="{{ current_variant.price | divided_by: 100.00 }}">
             {{ current_variant.price | money }}
           </span>
-
-{% comment %}        </div>
-      </div>
-
-      <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--two-fifths">
-        <div class="product-single__meta">{% endcomment %}
 
           <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
             {% comment %}
@@ -235,10 +220,6 @@
     {{ product | json }}
   </script>
 {% endunless %}
-
-<script>
-  $(".stick-this").stick_in_parent("offset_top:30px");
-</script>
 
 <script>
   (function() {

@@ -61,11 +61,10 @@
 
   {% comment %}{{ '//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js' | script_tag }}{% endcomment %}
   {{ '//code.jquery.com/jquery-3.3.1.min.js' | script_tag }}
+    {% comment %}{{ '//code.jquery.com/jquery-2.2.4.min.js' | script_tag }}{% endcomment %}
   {{ 'modernizr.min.js' | asset_url | script_tag }}
 
-  {% comment %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />{% endcomment %}
-
-  
+  {% comment %}<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />{% endcomment %}  
 
   {% include 'vela-header-javascript' %}
   {{ 'instafeed.min.js' | asset_url | script_tag }}

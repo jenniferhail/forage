@@ -1822,8 +1822,6 @@ theme.Product = (function() {
     this.selectors = {
       productImages: '.product-single__photos',
       productImagePhoto: '.product-single__photo',
-      aboutImages: '.about__photos',
-      aboutImagePhoto: '.about__photo',
       productImage: '#ProductPhotoImg',
       addToCart: '#AddToCart',
       productPrice: '#ProductPrice',
@@ -2155,6 +2153,7 @@ theme.About = (function() {
     initBreakpoints: function() {
       var self = this;
       var $container = self.$container;
+	  self.createImageCarousel();
       // self.zoomType = $container.data('image-zoom-type');
 
       // if (!$('html').hasClass('lt-ie9')) {
@@ -2168,16 +2167,16 @@ theme.About = (function() {
       //   });
       // }
 
-      if (!$('html').hasClass('lt-ie9')) {
-        enquire.register(theme.variables.mediaQueryMediumUp, {
-          match: function() {
-            self.createImageCarousel();
-          }
-          // unmatch: function() {
-          //   self.destroyImageCarousel();
-          // }
-        });
-      }
+      // if (!$('html').hasClass('lt-ie9')) {
+      //   enquire.register(theme.variables.mediaQueryMediumUp, {
+      //     match: function() {
+      //       self.createImageCarousel();
+      //     }
+      //     // unmatch: function() {
+      //     //   self.destroyImageCarousel();
+      //     // }
+      //   });
+      // }
     },
 
     stringOverrides: function() {
@@ -2744,12 +2743,12 @@ $(document).ready(function() {
 $(document).ready(function () {
   var $form = $('#mc-embedded-subscribe-form')
   if ($form.length > 0) {
-    $('form input[type="submit"]').bind('click', function (event) {
+    $('#mc-embedded-subscribe').bind('click', function (event) {
       if (event) event.preventDefault()
       register($form)
-    })
+    });
   }
-})
+});
 
 function register($form) {
   $('#mc-embedded-subscribe').val('Sending...');
@@ -2779,3 +2778,42 @@ function register($form) {
     }
   })
 };
+
+// Sticky product images
+
+// $(document).ready(function () {
+//   var $form = $('#mc-embedded-subscribe-form')
+//   if ($form.length > 0) {
+//     $('form input[type="submit"]').bind('click', function (event) {
+//       if (event) event.preventDefault()
+//       register($form)
+//     });
+//   }
+// });
+
+// $(".stick-this").stick_in_parent("offset_top:30px");
+
+$(document).ready(function() {
+	var window_width = $( window ).width();
+
+	if (window_width < 591) {
+		$(".stick-this").trigger("sticky_kit:detach");
+	} else {
+		make_sticky();
+	}
+
+	$( window ).resize(function() {
+		window_width = $( window ).width();
+
+		if (window_width < 591) {
+			$(".stick-this").trigger("sticky_kit:detach");
+		} else {
+			make_sticky();
+		}
+	});
+
+	function make_sticky() {
+		$(".stick-this").stick_in_parent();
+	}
+
+});
