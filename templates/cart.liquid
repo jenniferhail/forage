@@ -16,7 +16,7 @@
 
       <form action="/cart" method="post" novalidate class="cart">
 
-        <div class="cart__row medium-down--hide cart__header-labels">
+        <div class="cart__row cart__header-labels">
           <div class="grid--full">
             <div class="grid__item large--two-fifths push--large--three-fifths">
               <div class="grid--full">
@@ -38,7 +38,7 @@
           <div class="cart__row">
             <div class="grid--full cart__row--table-large">
 
-              <div class="grid__item large--three-fifths">
+              <div class="grid__item three-fifths">
                 <div class="grid">
 
                   <div class="grid__item one-third item-image">
@@ -99,17 +99,17 @@
                 </div>
               </div>
 
-              <div class="grid__item large--two-fifths">
-                <div class="grid--full cart__row--table">
+              <div class="grid__item two-fifths">
+                <div class="grid--full cart__row--table small-stack">
 
-                  <div class="grid__item one-third text-center">
+                  <div class="grid__item medium-up--one-third text-center small--text-right">
 
                     <label for="updates_{{ item.key }}" class="visually-hidden">{{ 'cart.label.quantity' | t }}</label>
                     <input type="number" name="updates[]" id="updates_{{ item.key }}" class="cart__product-qty" value="{{ item.quantity }}" min="0" data-id="{{ item.key }}">
 
                   </div>
 
-                  <div class="grid__item two-thirds text-right">
+                  <div class="grid__item medium-up--two-thirds text-right">
                     {% if item.original_line_price != item.line_price %}
                       <small class="cart__price cart__price--strikethrough">{{ item.original_line_price | money }}</small>
                     {% endif %}

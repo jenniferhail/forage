@@ -3500,6 +3500,12 @@ footer {
   margin: 65px 0 30px;
 }
 
+@include at-query($max, $small) {
+  .cart__row--table.small-stack .grid__item {
+    display: block;
+  }
+}
+
 /*================ Module | Product Lightbox ================*/
 
 .mfp-bg {
@@ -4767,6 +4773,10 @@ button.mfp-arrow {
   width: 90%;
   img {
     display: block;
+    margin-bottom: $gutter;
+    @include at-query($min, $small) {
+      margin-bottom: 0;
+    }
   }
   .btn {
     width: 100%;
@@ -4800,8 +4810,11 @@ button.mfp-arrow {
   padding: 30px;
 }
 
-a.quickview-link:hover {
-  color: $colorBtnPrimary;
+a.quickview-link {
+  padding: 0 0 15px 25px;
+  &:hover {
+    color: $colorBtnPrimary;
+  }
 }
 
 .fancybox-close-small {
