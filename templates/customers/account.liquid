@@ -13,7 +13,7 @@
   <h1>{{ 'layout.customer.title'| t }} {{ 'layout.customer.log_out'| t | customer_logout_link }}</h1>
 </header>
 
-<div class="grid">
+<div class="grid small--text-center medium--text-center">
 
   <div class="grid__item two-thirds medium-down--one-whole">
     <h2 class="h3">{{ 'customer.orders.title' | t }}</h2>
@@ -60,7 +60,7 @@
   <div class="grid__item one-third medium-down--one-whole">
     <h3>{{ 'customer.account.details' | t }}</h3>
 
-    <p class="h5">{{ customer.name }}</p>
+    <p>{{ customer.name }}</p>
 
     {{ customer.default_address | format_address }}
 

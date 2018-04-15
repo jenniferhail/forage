@@ -2,11 +2,11 @@
 
 <div class="grid">
 
-  <div class="grid__item large--one-third push--large--one-third text-center">
+  <div class="grid__item large--two-fifths push--large--three-tenths medium--three-quarters push--medium--one-eighth text-center">
 
-    <header class="section-header">
-      <h1>{{ 'customer.login.title' | t }}</h1>
-      <hr class="hr--small">
+    <header class="section-header text-center">
+      <span class="h2">{{ 'customer.login.title' | t }}</span>
+      <h1>{{ 'customer.login.title_message' | t }}</h1>
     </header>
 
     {% comment %}
@@ -50,7 +50,6 @@
 
       <h3>{{ 'customer.recover_password.title' | t }}</h3>
       <p>{{ 'customer.recover_password.subtext' | t }}</p>
-      <hr class="hr--small">
 
       <div class="form-vertical">
         {% form 'recover_customer_password' %}
