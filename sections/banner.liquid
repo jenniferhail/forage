@@ -1,7 +1,7 @@
-{% if section.settings.banner_text %}
-  <div class="grid banner-wrapper">
-    <div class="grid__item banner">
-      <p><a href="{{ section.settings.banner_link }}">{{ section.settings.banner_text }}</a></p>
+{% if section.settings.banner_text != blank %}
+  <div class="banner-wrapper">
+    <div class="banner">
+      <button class="medium-up--text-left" type="button" href="{{ section.settings.banner_link }}">{{ section.settings.banner_text }}</button>
     </div>
   </div>
 {% endif %}

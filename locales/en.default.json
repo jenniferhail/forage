@@ -40,8 +40,8 @@
       "submit": "Subscribe"
     },
     "search": {
-      "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
-      "results_for_html": "Your search for \"{{ terms }}\" revealed the following:",
+      "no_results_html": "Your search for \"{{ terms }}\" came up short.",
+      "results_for_html": "Your search for \"{{ terms }}\" found the following:",
       "subtitle": "How can we help you?",
       "title": "Search",
       "placeholder": "Search our store",
@@ -88,7 +88,7 @@
       "update": "Update Cart",
       "checkout": "Check Out",
       "empty": "Your cart is currently empty.",
-      "full": "Your cart isn't empty.",
+      "full": "You found some great stuff.",
       "continue_browsing_html": "Let's fix that",
       "close_cart": "Close Cart",
       "savings_html": "You're saving {{ savings }}",
@@ -184,6 +184,7 @@
     },
     "login": {
       "title": "Login",
+      "title_message": "Welcome to Forage!",
       "email": "Email",
       "password": "Password",
       "forgot_password": "Forgot your password?",
@@ -238,6 +239,7 @@
     },
     "register": {
       "title": "Create Account",
+      "title_message": "So, things are getting serious.",
       "first_name": "First Name",
       "last_name": "Last Name",
       "email": "Email",

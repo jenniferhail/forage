@@ -12,19 +12,17 @@
 
 <div data-section-id="{{ section.id }}" class="wrapper">
 
-    <div class="grid hero-{{ section.id }} hero hero--first">
+    <div class="hero-{{ section.id }} hero hero--first">
 
       {% comment %}<div class="hero__left">{% endcomment %}
 
-        <div class="grid__item hero__image--left three-quarters" style="background: url({{ section.settings.image_left | img_url: '1024x1024' | format: 'jpg' }}) center center no-repeat; background-size: cover;">
-          <img src="{{ section.settings.image_left | img_url: '1024x1024' | format: 'jpg' }}" style="display: none;">
+        <div class="hero__image--left medium-up--three-quarters">
+          <img src="{{ section.settings.image_left | img_url: '1024x1024' | format: 'jpg' }}">
         </div>
 
-        <div class="grid__item hero__image--right one-quarter">
-          <div>
-            <img src="{{ section.settings.image_right | img_url: '1024x1024' | format: 'jpg' }}">
-            <button type="button" class="btn" data-fancybox data-src="#newsletter" href="javascript:;">{{ section.settings.button_text }}</button>
-          </div>
+        <div class="hero__image--right medium-up--one-quarter">
+          <img class="small--hide" src="{{ section.settings.image_right | img_url: '1024x1024' | format: 'jpg' }}">
+          <button type="button" class="btn" data-fancybox data-src="#newsletter" href="javascript:;">{{ section.settings.button_text }}</button>
         </div>
 
 {% comment %}        {% if section.settings.image_left != blank %}
