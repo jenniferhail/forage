@@ -15,8 +15,8 @@
 
 <div class="grid small--text-center medium--text-center">
 
-  <div class="grid__item two-thirds medium-down--one-whole">
-    <h2 class="h3">{{ 'customer.orders.title' | t }}</h2>
+  <div class="grid__item two-thirds medium-down--one-whole account-section">
+    <h2 class="h4">{{ 'customer.orders.title' | t }}</h2>
 
     {% comment %}
       If we have past orders, loop through each one
@@ -57,8 +57,8 @@
     {% endif %}
   </div>
 
-  <div class="grid__item one-third medium-down--one-whole">
-    <h3>{{ 'customer.account.details' | t }}</h3>
+  <div class="grid__item one-third medium-down--one-whole account-section">
+    <h3 class="h4">{{ 'customer.account.details' | t }}</h3>
 
     <p>{{ customer.name }}</p>
 

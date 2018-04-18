@@ -4748,6 +4748,12 @@ button.mfp-arrow {
   position: inherit;
 }
 
+@include at-query($max, $medium) {
+  .account-section {
+    margin: 1em 0;
+  }
+}
+
 .product-single__description {
   margin-top: 60px;
   h1, h2, h3, h4, h5 {
