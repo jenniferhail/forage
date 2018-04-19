@@ -11,27 +11,15 @@
     <div class="grid product-single">
 
       {% if product.images.size > 1 %}
-        <div class="grid__item small--hide one-twelfth stick-this">
-          <div class="thumbnails-wrapper">
-            <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
+      <div class="grid__item small--hide one-twelfth stick-this">
+        <div class="thumbnails-wrapper">
+          <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
 
-              {% if product.type == "Event" %}
-                {% for image in product.images %}
-                  {% if forloop.last == true %}
-                    {% break %}
-                  {% else %}
-                    <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
-                      <a href="#{{ image.id }}"
-                         class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
-                         data-thumbnail-id="{{ image.id }}"
-                         {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
-                           <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
-                      </a>
-                    </li>
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                {% for image in product.images %}
+            {% if product.type == "Event" %}
+              {% for image in product.images %}
+                {% if forloop.last == true %}
+                  {% break %}
+                {% else %}
                   <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
                     <a href="#{{ image.id }}"
                        class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
@@ -40,36 +28,35 @@
                          <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
                     </a>
                   </li>
-                {% endfor %}
-              {% endif %}
-
-            </ul>
-          </div>
-        </div>
-
-        <div class="grid__item one-whole medium-up--six-twelfths stick-this">
-      {% else %}
-        <div class="grid__item one-whole medium-up--seven-twelfths stick-this">
-      {% endif %} 
-
-          <div class="product-single__photos">
-            {% if product.type == "Event" %}
-              {% for image in product.images %}
-                {% if forloop.last == true %}
-                  {% break %}
-                {% else %}
-                  <div class="product-single__photo-wrapper">
-                    <img class="product-single__photo" 
-                      id="{{ image.id }}"
-                      src="{{ image.src | img_url: '1024x1024' }}"
-                      {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %}
-                      alt="{{ image.alt | escape }}"
-                      data-image-id="{{ image.id }}">
-                  </div>
                 {% endif %}
               {% endfor %}
             {% else %}
               {% for image in product.images %}
+                <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
+                  <a href="#{{ image.id }}"
+                     class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+                     data-thumbnail-id="{{ image.id }}"
+                     {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+                       <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
+                  </a>
+                </li>
+              {% endfor %}
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+      <div class="grid__item one-whole medium-up--six-twelfths stick-this">
+      {% else %}
+      <div class="grid__item one-whole medium-up--seven-twelfths">
+      {% endif %} 
+
+        <div class="product-single__photos">
+          {% if product.type == "Event" %}
+            {% for image in product.images %}
+              {% if forloop.last == true %}
+                {% break %}
+              {% else %}
                 <div class="product-single__photo-wrapper">
                   <img class="product-single__photo" 
                     id="{{ image.id }}"
@@ -78,11 +65,23 @@
                     alt="{{ image.alt | escape }}"
                     data-image-id="{{ image.id }}">
                 </div>
-              {% endfor %}
-            {% endif %}
-          </div>
-
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            {% for image in product.images %}
+              <div class="product-single__photo-wrapper">
+                <img class="product-single__photo" 
+                  id="{{ image.id }}"
+                  src="{{ image.src | img_url: '1024x1024' }}"
+                  {% if section.settings.zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %}
+                  alt="{{ image.alt | escape }}"
+                  data-image-id="{{ image.id }}">
+              </div>
+            {% endfor %}
+          {% endif %}
         </div>
+
+      </div>
 
       <div class="grid__item product-single__meta--wrapper one-whole medium-up--five-twelfths stick-this">
         <div class="product-single__meta">

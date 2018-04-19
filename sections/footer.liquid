@@ -1,7 +1,7 @@
 <footer class="site-footer small--text-center medium--text-center" role="contentinfo">
   <div class="wrapper grid">
 
-    <div class="grid__item one-whole">
+    <div class="one-whole">
       {% comment %}
         Use the uploaded logo from theme settings if enabled.
         Site name gets precedence with H1 tag on homepage, div on other pages.
@@ -38,8 +38,8 @@
       {% endif %}
     </div>
 
-    <div class="grid__item large--five-sixths push--large--one-tenth">
-      <div class="grid">
+    <div class="grid large--five-sixths push--large--one-tenth">
+      {% comment %}<div class="grid">{% endcomment %}
 
       {% comment %}
         Default to 1 footer column (copyright/powered_by/payment_types)
@@ -112,9 +112,9 @@
         {% when 3 %}
           {% assign footer_column_width = 'one-third small--one-whole medium--one-half' %}
         {% when 4 %}
-          {% assign footer_column_width = 'large--one-quarter medium--one-half' %}
+          {% assign footer_column_width = 'medium--one-half large--one-quarter' %}
         {% when 5 %}
-          {% assign footer_column_width = 'large--one-fifth medium--one-half' %}
+          {% assign footer_column_width = 'medium--one-half large--one-fifth' %}
       {% endcase %}
 
       {% if section.settings.footer_hours != blank %}
@@ -123,7 +123,7 @@
               <span class="footer-heading">{{ section.settings.footer_hours_title }}</span>
             {% endif %}
             {% if section.settings.footer_hours != blank %}
-              <p class="no-bullets">{{ section.settings.footer_hours }}</p>
+              <ul class="no-bullets">{{ section.settings.footer_hours }}</ul>
             {% endif %}
         </div>
       {% endif %}
@@ -161,12 +161,12 @@
             <ul class="no-bullets social-icons">
               {% if settings.social_facebook_link != blank %}
                 <li>
-                  <a href="{{ settings.social_facebook_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">Facebook</a>
+                  <a href="{{ settings.social_facebook_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Facebook' }}">Facebook</a>
                 </li>
               {% endif %}
               {% if settings.social_twitter_link != blank %}
                 <li>
-                  <a href="{{ settings.social_twitter_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
+                  <a href="{{ settings.social_twitter_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Twitter' }}">
                     {% comment %}<span class="icon icon-twitter" aria-hidden="true"></span>{% endcomment %}
                     Twitter
                   </a>
@@ -174,7 +174,7 @@
               {% endif %}
               {% if settings.social_pinterest_link != blank %}
                 <li>
-                  <a href="{{ settings.social_pinterest_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
+                  <a href="{{ settings.social_pinterest_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Pinterest' }}">
                     {% comment %}<span class="icon icon-pinterest" aria-hidden="true"></span>{% endcomment %}
                     Pinterest
                   </a>
@@ -182,7 +182,7 @@
               {% endif %}
               {% if settings.social_instagram_link != blank %}
                 <li>
-                  <a href="{{ settings.social_instagram_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
+                  <a href="{{ settings.social_instagram_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Instagram' }}">
                     {% comment %}<span class="icon icon-instagram" aria-hidden="true"></span>{% endcomment %}
                     Instagram
                   </a>
@@ -190,7 +190,7 @@
               {% endif %}
               {% if settings.social_snapchat_link != blank %}
                 <li>
-                  <a href="{{ settings.social_snapchat_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Snapchat' }}">
+                  <a href="{{ settings.social_snapchat_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Snapchat' }}">
                     {% comment %}<span class="icon icon-snapchat" aria-hidden="true"></span>{% endcomment %}
                     Snapchat
                   </a>
@@ -198,7 +198,7 @@
               {% endif %}
               {% if settings.social_google_plus_link != blank %}
                 <li>
-                  <a href="{{ settings.social_google_plus_link }}" rel="publisher" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Google Plus' }}">
+                  <a href="{{ settings.social_google_plus_link }}" target="_blank" rel="publisher" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Google Plus' }}">
                     {% comment %}<span class="icon icon-google_plus" aria-hidden="true"></span>{% endcomment %}
                     Google Plus
                   </a>
@@ -206,7 +206,7 @@
               {% endif %}
               {% if settings.social_tumblr_link != blank %}
                 <li>
-                  <a href="{{ settings.social_tumblr_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
+                  <a href="{{ settings.social_tumblr_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Tumblr' }}">
                     {% comment %}<span class="icon icon-tumblr" aria-hidden="true"></span>{% endcomment %}
                     Tumblr
                   </a>
@@ -214,7 +214,7 @@
               {% endif %}
               {% if settings.social_youtube_link != blank %}
                 <li>
-                  <a href="{{ settings.social_youtube_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
+                  <a href="{{ settings.social_youtube_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'YouTube' }}">
                     {% comment %}<span class="icon icon-youtube" aria-hidden="true"></span>{% endcomment %}
                     YouTube
                   </a>
@@ -222,7 +222,7 @@
               {% endif %}
               {% if settings.social_vimeo_link != blank %}
                 <li>
-                  <a href="{{ settings.social_vimeo_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
+                  <a href="{{ settings.social_vimeo_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Vimeo' }}">
                     {% comment %}<span class="icon icon-vimeo" aria-hidden="true"></span>{% endcomment %}
                     Vimeo
                   </a>
@@ -230,7 +230,7 @@
               {% endif %}
               {% if settings.social_fancy_link != blank %}
                 <li>
-                  <a href="{{ settings.social_fancy_link }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
+                  <a href="{{ settings.social_fancy_link }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: 'Fancy' }}">
                     {% comment %}<span class="icon icon-fancy" aria-hidden="true"></span>{% endcomment %}
                     Fancy
                   </a>
@@ -243,42 +243,24 @@
       {% if section.settings.footer_newsletter_text != blank %}
         <div class="grid__item {{ footer_column_width }}">
           <span class="footer-heading">{{ section.settings.footer_newsletter_title }}</span>
-          <p>{{ section.settings.footer_newsletter_text }}</br>
-          <a class="footer-link" data-fancybox data-src="#newsletter" href="javascript:;">{% if section.settings.footer_newsletter_btn != blank %}{{ section.settings.footer_newsletter_btn }}{% else %}Yes please!{% endif %}</a></p>
-          {% include 'newsletter' %}
+          <p>{{ section.settings.footer_newsletter_text }}<br><a class="footer-link" data-fancybox data-src="#newsletter" href="javascript:;">{% if section.settings.footer_newsletter_btn != blank %}{{ section.settings.footer_newsletter_btn }}{% else %}Yes please!{% endif %}</a></p>
         </div>
       {% endif %}
 
-      </div>
+      {% comment %}</div>{% endcomment %}
     </div>
 
-    <div class="grid__item one-whole endnotes text-center">
+    <div class="one-whole endnotes text-center">
       <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name | link_to: '/' }}. All rights reserved.<br>
         {% if section.settings.footer_link_one_url %}
           <span><a href="{{ section.settings.footer_link_one_url }}">{{ section.settings.footer_link_one }}</a></span>
         {% endif %}
-        <span><a href="http://www.bypine.co">Site Credit</a></span>
+        <span><a href="http://www.bypine.co" target="_blank">Site Credit</a></span>
         {% if section.settings.footer_link_two_url %}
           <span><a href="{{ section.settings.footer_link_two_url }}">{{ section.settings.footer_link_two }}</a></span>
         {% endif %}
       </p>
     </div>
-
-{% comment %}        {% unless shop.enabled_payment_types == empty %}
-        {% assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' %}
-        <ul class="inline-list payment-icons">
-          {% for type in shop.enabled_payment_types %}
-            {% if payment_icons_available contains type %}
-              <li>
-                <span class="icon-fallback-text">
-                  <span class="icon icon-{{ type }}" aria-hidden="true"></span>
-                  <span class="fallback-text">{{ type | replace: '_',' ' }}</span>
-                </span>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      {% endunless %}{% endcomment %}
 
   </div>
 </footer>

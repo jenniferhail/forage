@@ -113,6 +113,8 @@
         {{ 'customer.addresses.delete' | t | delete_customer_address_link: address.id }}
       </p>
 
+      <hr class="hr--small hr--clear">
+
       <div id="EditAddress_{{address.id}}" class="form-vertical" style="display:none;">
         {% form 'customer_address', address %}
 

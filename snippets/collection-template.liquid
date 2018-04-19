@@ -102,7 +102,7 @@
         {% comment %}
           If collection exists but is empty, display message
         {% endcomment %}
-        <div class="grid__item text-center">
+        <div class="grid__item text-center false-alarm">
           <p>{{ 'collections.general.no_matches' | t }}</p>
         </div>
       {% endif %}
@@ -127,7 +127,7 @@
           {% comment %}
             If collection exists but is empty, display message
           {% endcomment %}
-          <div class="grid__item text-center">
+          <div class="grid__item text-center false-alarm">
             <p>{{ 'collections.general.no_matches' | t }}</p>
           </div>
         {% endif %}
