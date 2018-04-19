@@ -2477,6 +2477,14 @@ $shareCountBg: $colorBody;
   }
 }
 
+.about__photos {
+  visibility: hidden;
+}
+
+.slick-initialized {
+  visibility: visible;
+}
+
 .bxslider.slick-initialized.slick-slider,
 .about__photos.slick-initialized.slick-slider {
   margin-bottom: 100px;
@@ -2836,6 +2844,7 @@ $slick-opacity-not-active: 0.25;
   left: 0;
   top: 0;
   display: block;
+  min-width: 100%;
   // background-color: #f8f8f8;
   &:before,
   &:after {
@@ -4707,7 +4716,7 @@ button.mfp-arrow {
 .banner-wrapper {
   margin: 15px 15px 0;
   @include at-query($min, $small) {
-    margin: 30px 30px 0;
+    margin: 30px auto 0;
   }
 }
 
@@ -4875,4 +4884,8 @@ a.quickview-link {
 
 .false-alarm {
   margin-top: 5em;
+}
+
+.js #flash {
+  display: none;
 }

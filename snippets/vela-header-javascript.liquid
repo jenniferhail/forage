@@ -1,4 +1,4 @@
-{% comment %}{{ 'jquery.2.2.3.js' | asset_url | script_tag }}{% endcomment %}
+{{ 'https://code.jquery.com/jquery-3.3.1.min.js' | script_tag }}
 <script>
     window.money = '{{shop.money_format}}';
     window.money_format = '{{shop.money_with_currency_format}}';

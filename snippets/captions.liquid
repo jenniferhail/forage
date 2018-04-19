@@ -2,8 +2,7 @@
 //<![CDATA[
 // Including jQuery conditionnally.
 if (typeof jQuery === 'undefined') {
-    document.write({{ "http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" | script_tag | json }});
-  document.write('<script type="text/javascript">jQuery.noConflict();<\/script>');
+    {{ "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" | script_tag | json }}
 }
 //]]>
 </script>
