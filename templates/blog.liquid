@@ -51,6 +51,9 @@
               <div class="rte rte--indented-images">
                 {{ article.excerpt_or_content }}
               </div>
+              <div class="read_more">
+                <a class="btn" href="{{ article.url }}">{% if article.metafields.c_f.moreLink != blank %}{{ article.metafields.c_f.moreLink }}{% else %}Read More{% endif %}</a>
+              </div>
 
     {% comment %}          <p>
                 <a href="{{ article.url }}" class="text-link">{{ 'blogs.article.read_more' | t }} <span class="icon icon-arrow-right" aria-hidden="true"></span></a>
