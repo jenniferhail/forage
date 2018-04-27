@@ -1,50 +1,54 @@
 <!-- /templates/page.consultations.liquid -->
-<div class="grid">
-  
-  <div class="grid__item">
+<div itemscope itemtype="http://schema.org/Product" id="SlideSection" data-section-id="{{ section.id }}" data-section-type="about-template">
 
-    <header class="section-header text-center">
-      <span class="h2">{{ page.title }}</span>
-      {% if page.metafields.c_f.subtext %}
-        <h1>{{ page.metafields.c_f.subtext }}</h1>
-      {% endif %}
-    </header>
+  <div class="grid">
+    
+    <div class="grid__item">
 
-    <div class="grid">
+      <header class="section-header text-center">
+        <span class="h2">{{ page.title }}</span>
+        {% if page.metafields.c_f.subtext %}
+          <h1>{{ page.metafields.c_f.subtext }}</h1>
+        {% endif %}
+      </header>
 
-      <div class="grid__item">
-        <hr class="hr--large">
-        {% for article in blogs["about"].articles limit: 1 %}
-          <div class="post-slider caption">
-            {{ article.excerpt }}
+      <div class="grid">
+
+        <div class="grid__item">
+          <hr class="hr--large">
+          {% for article in blogs["about"].articles limit: 1 %}
+            <div class="post-slider caption">
+              {{ article.excerpt }}
+            </div>
+          {% endfor %}
+          {% section 'slider-consultation' %}
+        </div>
+
+        <div class="grid__item large--three-fifths push--large--two-tenths">
+          <div class="rte rte--nomargin rte--indented-images">
+            {{ page.content }}
           </div>
-        {% endfor %}
-        {% section 'slider-consultation' %}
-      </div>
-
-      <div class="grid__item large--three-fifths push--large--two-tenths">
-        <div class="rte rte--nomargin rte--indented-images">
-          {{ page.content }}
         </div>
+
       </div>
 
-    </div>
+      <div class="grid">
 
-    <div class="grid">
+        <div class="grid__item form-section large--four-tenths push--large--three-tenths">
 
-      <div class="grid__item form-section large--four-tenths push--large--three-tenths">
+          <div class="form-vertical">
 
-        <div class="form-vertical">
+            {% section 'form-consultation' %}
 
-          {% section 'form-consultation' %}
+          </div>
 
         </div>
 
       </div>
 
     </div>
-
   </div>
+
 </div>
 
 <script>

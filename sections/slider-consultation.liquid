@@ -1,10 +1,10 @@
 {% if section.blocks.size > 0 %}
-  <div class="bxslider">
+  <div class="about__photos">
     {% for block in section.blocks %}
-      <div class="item slick-slide">
+      <div class="about__photo-wrapper">
         
         {% if block.settings.image != blank %}
-          <img src="{{  block.settings.image | img_url: '2048x2048' | format: 'jpg' }}"{% if block.settings.slide_caption %} title="{{ block.settings.slide_caption }}"{% endif %}>
+          <img class="about__photo" src="{{  block.settings.image | img_url: '2048x2048' | format: 'jpg' }}"{% if block.settings.slide_caption %} title="{{ block.settings.slide_caption }}"{% endif %}>
           {% if block.settings.slide_caption %}
             <div class="bx-caption"><span>{{ block.settings.slide_caption }}</span></div>
           {% endif %}
