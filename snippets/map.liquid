@@ -176,12 +176,12 @@
 
     var louStore = {lat: 38.2574914, lng: -85.7181484};
     // Use louStore as center until we announce the new location
-    var center = {lat: 38.2574914, lng: -85.7181484};
-    // var lexStore = {lat: 38.0575564, lng: -84.4831961};
-    // var center = { lat: 38.160288, lng: -85.097392}; ** set zoom to 9 **
+    // var center = {lat: 38.2574914, lng: -85.7181484};
+    var lexStore = {lat: 38.057531, lng: -84.480943};
+    var center = { lat: 38.160288, lng: -85.097392};
 
     var map = new google.maps.Map(document.getElementById('forage-map'), {
-      zoom: 15,
+      zoom: 9,
       center: center,
       scrollwheel: false
     });
@@ -194,11 +194,11 @@
       icon: iconBase
     });
 
-    // var lexMarker = new google.maps.Marker({
-    //   position: lexStore,
-    //   map: map,
-    //   icon: iconBase
-    // });
+    var lexMarker = new google.maps.Marker({
+      position: lexStore,
+      map: map,
+      icon: iconBase
+    });
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
