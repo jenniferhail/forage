@@ -1,4 +1,11 @@
 <!-- /templates/product.liquid -->
+
+<style>
+  .product-single__shipping {
+    background-color: {{ settings.color_product_pickup }};
+  }
+</style>
+
 <div itemscope itemtype="http://schema.org/Product" id="ProductSection" data-section-id="{{ section.id }}" data-section-type="product-template" data-image-zoom-type="{{ section.settings.zoom_enable }}" data-enable-history-state="true">
   <div itemscope itemtype="http://schema.org/Product">
 
@@ -119,6 +126,17 @@
 
             <meta itemprop="priceCurrency" content="{{ shop.currency }}">
             <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+            {% unless product.type == "Event" %}
+              {% for variant in product.variants %}
+                {% unless variant.requires_shipping %}
+                  <div class="product-single__shipping">
+                    {{ 'products.product.pickup' | t }}
+                  </div>
+                  {% break %}
+                {% endunless %}
+              {% endfor %}
+            {% endunless %}
 
             <div class="product-single__description rte" itemprop="description">
               {{ product.description }}

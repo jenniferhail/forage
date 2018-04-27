@@ -1389,13 +1389,18 @@ blockquote {
 }
 
 .comment-author {
-  @include bodyFontItalic;
+  @include sweetRegular;
+  font-size: em(12px);
   margin-bottom: 0;
+  color: $colorBtnPrimary;
 }
 
 .comment-date {
   @include sweetRegular;
   font-size: em(12px);
+  margin-bottom: 1em;
+  display: block;
+  color: $colorTextSub;
 }
 
 /*================ Cart Typography ================*/
@@ -1472,6 +1477,10 @@ blockquote {
   @include display-flexbox();
   @include justify-content(flex-start);
   @include align-items(flex-start);
+}
+
+.cart__product-pickup {
+  font-style: italic;
 }
 
 /*================ Misc typography ================*/
@@ -2273,6 +2282,11 @@ $shareCountBg: $colorBody;
     margin-top: 60px;
   }
 }
+#consultations {
+  .section-header {
+    margin-top: 0;
+  }
+}
 
 /*================ Partials | Sections onboarding ================*/
 .placeholder-svg {
@@ -2465,7 +2479,7 @@ $shareCountBg: $colorBody;
     opacity: 0.75;
     @include transition(opacity 0.15s ease-out);
     &.slick-active {
-      opacity: 100;
+      opacity: 1;
     }
     img {
       max-height: 550px;
@@ -3531,6 +3545,13 @@ footer {
   }
 }
 
+.product-single__shipping {
+  margin-top: $gutter * 2;
+  padding: $gutter / 2;
+  text-align: center;
+  color: $colorBody;
+}
+
 /*================ Module | Product Lightbox ================*/
 
 .mfp-bg {
@@ -3813,9 +3834,27 @@ button.mfp-arrow {
   display: block;
   margin: 0 auto;
 
-  .is-sold-out & {
-    opacity: 0.5;
-  }
+  // .is-sold-out & {
+  //   opacity: 0.5;
+  // }
+}
+
+.is-sold-out .grid-product__image-link:after {
+  content: 'Sold Out';
+  text-align: center;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 72%;
+  background: rgba(76,76,75,.3);
+  color: $colorBody;
+  @include sweetRegular;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
 
 // .grid-collage {
@@ -3927,7 +3966,7 @@ button.mfp-arrow {
 
 .product-single__price,
 .product-single__price--compare-at {
-  @include sweetRegular;
+  @include sweetMedium;
 }
 
 .long-dash {
@@ -4888,4 +4927,9 @@ a.quickview-link {
 
 .js #flash {
   display: none;
+}
+
+.read_more {
+  margin-top: 50px;
+  margin-bottom: $gutter;
 }

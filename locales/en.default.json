@@ -85,6 +85,7 @@
       "note": "Special instructions for seller",
       "subtotal": "Subtotal",
       "shipping_at_checkout": "Shipping, taxes, and discounts calculated at checkout.",
+      "pickup": "In-Store Pick Up Only",
       "update": "Update Cart",
       "checkout": "Check Out",
       "empty": "Your cart is currently empty.",
@@ -282,7 +283,8 @@
       "sold_out_html": "Sold<br \/> Out",
       "unavailable": "Unavailable",
       "quantity": "Quantity",
-      "add_to_cart": "Add to Cart"
+      "add_to_cart": "Add to Cart",
+      "pickup": "In-Store Pick Up Only"
     },
     "zoom": {
       "next": "Next (Right arrow key)",
