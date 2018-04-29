@@ -18,15 +18,54 @@
     <div class="grid product-single">
 
       {% if product.images.size > 1 %}
-      <div class="grid__item small--hide one-twelfth stick-this">
-        <div class="thumbnails-wrapper">
-          <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
 
-            {% if product.type == "Event" %}
-              {% for image in product.images %}
-                {% if forloop.last == true %}
-                  {% break %}
-                {% else %}
+        {% if product.type == "Event" %}
+
+          {% if product.images.size == 2 %}
+
+            {% comment %}Event w/ only two images = no thumbnails{% endcomment %}
+
+            <div class="grid__item one-whole medium-up--seven-twelfths">
+
+          {% else %}
+
+            {% comment %}Event w/ more than two images = display thumbnails{% endcomment %}
+
+            <div class="grid__item small--hide one-twelfth stick-this">
+              <div class="thumbnails-wrapper">
+                <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
+
+                  {% for image in product.images %}
+                    {% if forloop.last == true %}
+                      {% break %}
+                    {% else %}
+                      <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
+                        <a href="#{{ image.id }}"
+                           class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
+                           data-thumbnail-id="{{ image.id }}"
+                           {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
+                             <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
+                        </a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+
+                </ul>
+              </div>
+            </div>
+            <div class="grid__item one-whole medium-up--six-twelfths stick-this">
+
+          {% endif %}
+
+        {% else %}
+
+          {% comment %}Not an event w/ more than one image = display thumbnails{% endcomment %}
+
+          <div class="grid__item small--hide one-twelfth stick-this">
+            <div class="thumbnails-wrapper">
+              <ul class="grid grid--uniform product-single__thumbnails product-single__thumbnails-{{ section.id }}">
+
+                {% for image in product.images %}
                   <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
                     <a href="#{{ image.id }}"
                        class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
@@ -35,27 +74,21 @@
                          <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
                     </a>
                   </li>
-                {% endif %}
-              {% endfor %}
-            {% else %}
-              {% for image in product.images %}
-                <li class="grid__item {{ product_thumbnail_width }} product-single__thumbnails-item js">
-                  <a href="#{{ image.id }}"
-                     class="scroll text-link product-single__thumbnail product-single__thumbnail--{{ section.id }}"
-                     data-thumbnail-id="{{ image.id }}"
-                     {% if enable_zoom %}data-zoom="{{ image.src | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
-                       <img class="product-single__thumbnail-image" src="{{ image.src | img_url: '110x110', scale: 2 }}" alt="{{ image.alt | escape }}">
-                  </a>
-                </li>
-              {% endfor %}
-            {% endif %}
+                {% endfor %}
 
-          </ul>
-        </div>
-      </div>
-      <div class="grid__item one-whole medium-up--six-twelfths stick-this">
+              </ul>
+            </div>
+          </div>
+          <div class="grid__item one-whole medium-up--six-twelfths stick-this">
+
+        {% endif %}
+
       {% else %}
+
+        {% comment %}Product w/ one image = no thumbnails {% endcomment %}
+
       <div class="grid__item one-whole medium-up--seven-twelfths">
+
       {% endif %} 
 
         <div class="product-single__photos">

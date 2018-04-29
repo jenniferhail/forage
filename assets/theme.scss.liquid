@@ -2476,7 +2476,7 @@ $shareCountBg: $colorBody;
 .about__photos {
   .slick-slide {
     padding: 0 10px;
-    opacity: 0.75;
+    opacity: 0.55;
     @include transition(opacity 0.15s ease-out);
     &.slick-active {
       opacity: 1;
@@ -2936,9 +2936,12 @@ $slick-opacity-not-active: 0.25;
   cursor: pointer;
   top: 50%;
   margin-top: -10px;
+  margin-left: 15px;
+  margin-right: 15px;
   padding: 0;
   border: none;
   outline: none;
+  z-index: 10;
   &:hover, &:focus {
     outline: none;
     color: $slick-opacity-on-hover;
@@ -3886,6 +3889,7 @@ button.mfp-arrow {
 
 .grid-event__meta {
   text-align: center;
+  position: absolute;
   .grid-product__title {
     @include headerFontStack;
     font-size: em(24px);
@@ -3900,7 +3904,8 @@ button.mfp-arrow {
   }
 }
 
-.collage-grid__row .grid {
+// .collage-grid__row .grid {
+.grid-collage {
   .product-grid-details {
     margin-bottom: 20px;
   }
@@ -3938,22 +3943,39 @@ button.mfp-arrow {
       }
     }
     .grid__item {
-      &:nth-child(even) {
-        .grid-event__meta {
-          right: 18%;
-          top: 10em;
-        }
-        .grid-product__image-link:before {
-          background: linear-gradient(to left, #ffffff, rgba(255,255,255,0));
+      .grid-event__meta {
+        left: auto;
+        right: auto;
+        top: 10em;
+      }
+    }
+  }
+  @include at-query($min, $medium) {
+    .collage-grid__row .grid {
+      .grid-product__image-link {
+        height: auto;
+        img {
+          height: auto;
         }
       }
-      &:nth-child(odd) {
-        .grid-event__meta {
-          left: 18%;
-          top: 10em;
+      .grid__item {
+        &:nth-child(even) {
+          .grid-event__meta {
+            right: 18%;
+            top: 10em;
+          }
+          .grid-product__image-link:before {
+            background: linear-gradient(to left, #ffffff, rgba(255,255,255,0));
+          }
         }
-        .grid-product__image-link:before {
-          background: linear-gradient(to right, #ffffff, rgba(255,255,255,0));
+        &:nth-child(odd) {
+          .grid-event__meta {
+            left: 18%;
+            top: 10em;
+          }
+          .grid-product__image-link:before {
+            background: linear-gradient(to right, #ffffff, rgba(255,255,255,0));
+          }
         }
       }
     }

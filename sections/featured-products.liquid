@@ -33,8 +33,6 @@
 
         {% if section.settings.collection_products_grid == 'collage' %}
 
-          {% assign is_reverse_row__product = false %}
-          {% assign three_row_index__product = 0 %}
           {% if collections[section.settings.home_featured_products].products_count > 50 %}
             {% assign collection_product_count__product = 50 %}
           {% else %}
@@ -42,9 +40,19 @@
           {% endif %}
           {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
 
-          {% for product in collections[section.settings.home_featured_products].products %}
-            {% include 'product-grid-collage' %}
-          {% endfor %}
+          {% if collections[section.settings.home_featured_products].products_count > 1 %}
+            <div class="grid__item collage-grid__row">
+              <div class="grid">
+                {% for product in collections[section.settings.home_featured_products].products %}
+                  {% include 'product-grid-events' %}
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            {% for product in collections[section.settings.home_featured_products].products %}
+              {% include 'product-grid-events' %}
+            {% endfor %}
+          {% endif %}
 
         {% else %}
 

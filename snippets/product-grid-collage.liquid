@@ -39,6 +39,7 @@
 {% assign collection_index__product = forloop.index %}
 {% assign max = section.settings.product_count %}
 {% assign remaining_length__product = collection_product_count__product | minus: collection_index__product %}
+{% assign product_count = forloop.length %}
 
 {% comment %}
   If there are more than three items left we want to put them in a 3
@@ -47,119 +48,13 @@
   3 row = 1 large product on the left, 2 small on the right
   reverse 3 row = 2 small products on the left, 1 large on the right
 {% endcomment %}
-{% if remaining_length__product > 3 %}
-  {% assign is_three_row__product = true %}
-{% endif %}
-
-{% comment %}
-  Put remaining items in a 2 row if necessary.
-{% endcomment %}
-{% if remaining_length__product < 4 and three_row_index__product > 2 %}
-  {% assign is_three_row__product = false %}
-{% endif %}
-
-{% comment %}
-  If the total number of products is divisible by 3, we will just use
-  3 and reversed 3 item rows
-{% endcomment %}
-{% if divisible_by_three__product == 0 %}
-  {% assign is_three_row__product = true %}
-{% endif %}
-
-{% comment %}
-  If we set is_three_row__product to true based on the conditionals above.
-{% endcomment %}
-{% if is_three_row__product == true %}
-
-  {% if three_row_index__product > 2 %}
-    {% if is_reverse_row__product %}
-      {% assign is_reverse_row__product = false %}
-    {% else %}
-      {% assign is_reverse_row__product = true %}
-    {% endif %}
-    {% assign three_row_index__product = 0 %}
-  {% endif %}
-
-    {% comment %}
-    Assign grid classes for 3 rows and reverse 3 rows
-  {% endcomment %}
-  {% case three_row_index__product %}
-    {% when 0 %}
-      {% if is_reverse_row__product %}
-        {% assign grid_item_width = 'grid__item--small one-whole reverse' %}
-      {% else %}
-        {% assign grid_item_width = 'grid__item--large one-whole' %}
-      {% endif %}
-    {% when 1 %}
-      {% if is_reverse_row__product %}
-        {% assign grid_item_width = 'grid__item--small one-whole reverse' %}
-      {% else %}
-        {% assign grid_item_width = 'grid__item--small one-whole' %}
-      {% endif %}
-    {% when 2 %}
-      {% if is_reverse_row__product %}
-        {% assign grid_item_width = 'grid__item--large one-whole reverse clearfix' %}
-      {% else %}
-        {% assign grid_item_width = 'grid__item--small one-whole clearfix' %}
-      {% endif %}
-  {% endcase %}
-
-  {% if three_row_index__product == 0 %}
-    <div class="grid__item collage-grid__row">
-      <div class="grid">
-  {% endif %}
-
-  {% comment %}
-    Wrap one-third items in reversed groups, so they can be floated properly without changing the order of products in the grid.
-  {% endcomment %}
-  {% if is_reverse_row__product and three_row_index__product == 0 %}
-    <div class="grid__item collage-grid__reverse--wrapper one-whole">
-      <div class="grid">
-  {% endif %}
-
-  {% comment %}Product Grid Item{% endcomment %}
-  {% include 'product-grid-events' %}
-
-  {% comment %}
-    Close out wrapper div for one-third reverse items
-  {% endcomment %}
-  {% if is_reverse_row__product and three_row_index__product == 1 %}
-      </div>
+{% if product_count > 1 %}
+  <div class="grid__item collage-grid__row">
+    <div class="grid">
+       {% include 'product-grid-events' %}
     </div>
-  {% endif %}
-
-  {% if three_row_index__product == 2 %}
-        </div>
-      </div>
-  {% endif %}
-
-  {% comment %}
-    Increment the group of three counter
-  {% endcomment %}
-  {% if three_row_index__product <= 2 %}
-    {% assign three_row_index__product = three_row_index__product | plus: 1 %}
-  {% endif %}
-
-  {% continue %}
-{% endif %}
-
-{% if collection_product_count__product == 1 %}
-  {% comment %} Set full width when there is 1 product in a collection by making
-  `grid_item_width` an empty string {% endcomment %}
-  {% assign grid_item_width = '' %}
-  {% include 'product-grid-events' %}
-  {% break %}
+  </div>
 {% else %}
-  {% comment %} Set item width to half if it isn't in a 3 row. {% endcomment %}
-  {% assign grid_item_width = 'one-whole' %}
   {% include 'product-grid-events' %}
-
-  {% comment %} We still need to increment the three_row_index_product {% endcomment %}
-  {% if three_row_index__product <= 2 %}
-    {% assign three_row_index__product = three_row_index__product | plus: 1 %}
-  {% endif %}
 {% endif %}
 
-{% if collection_index__product == max %}
-  {% break %}
-{% endif %}
