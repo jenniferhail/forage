@@ -369,3 +369,13 @@ ShopifyAPI.changeItem = function(line, quantity, callback) {
         // moneyFormat: window.money
 //     });
 // });
+
+// Masonry grid
+var grid = document.querySelector('.blog-roll');
+var msnry = new Masonry( grid, {
+  // options
+  itemSelector: '.article',
+  columnWidth: '.article',
+  percentPostion: true
+});
+

@@ -4320,6 +4320,13 @@ button.mfp-arrow {
 
 /*================ View-specific styles ================*/
 /*================ Templates | Theme Blog ================*/
+.blog-roll {
+  margin-left: -($gutter / 2);
+  @include at-query($min, $postSmall) {
+    margin-left: -$gutter;
+  }
+}
+
 .article {
   margin-bottom: -($gutter / 2);
 }
